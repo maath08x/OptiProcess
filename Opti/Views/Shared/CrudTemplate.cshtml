@@ -1,0 +1,109 @@
+﻿
+@{
+    Layout = null;
+}
+<div id="content-wrapper">
+
+    <!-- Nome da View e Botões CRUD-->
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            @if (ViewBag.AtributosSearch != null)
+            {
+                foreach (var item in @ViewBag.AtributosSearch)
+                {
+                    string n = @item + "_Search";
+                    <input type="text" class="form-control col-md-2 mr-md-3 ml-3" placeholder="@item" id="@n" />
+                }
+            }
+            <div class="row">
+                <button type="button" class="btn btn-primary d-md-inline-block form-inline mr-0 mr-md-3 ml-3" onclick="return Pesquisar();"><div class="fas fa-fw fa-search"></div></button>
+                <button type="button" class="btn btn-primary d-md-inline-block form-inline mr-0 mr-md-2 ml-3" data-toggle="modal" data-target="#addModal"><div class="fas fa-fw fa-plus"></div></button>
+            </div>
+        </ol>
+    </div>
+
+    <!-- Adicionar -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Adicionar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body form-row">
+                    @if (ViewBag.AtributosEditable != null)
+                    {
+                        foreach (var item in @ViewBag.AtributosEditable)
+                        {
+                            string n = @item + "_Add";
+                            <input type="text" class="form-control col-md-2 mr-md-3 ml-3" placeholder="@item" id="@n" />
+                        }
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" onclick="return Adicionar();" class="btn btn-primary">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Editar -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body form-row">
+                    @if (ViewBag.AtributosEditable != null)
+                    {
+                        foreach (var item in @ViewBag.AtributosEditable)
+                        {
+                            string n = @item + "_Edit";
+                            <input type="text" class="form-control col-md-2 mr-md-3 ml-3" placeholder="@item" id="@n" />
+                        }
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="return Alterar();" class="btn btn-primary">Alterar</button>
+                    <button type="button" onclick="return Deletar();" class="btn btn-danger">Deletar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista CRUD -->
+    <div class="container">
+        <div class="card" style="margin-top:15px">
+            <div class="card-header">
+                <i class="fas fa-table"></i> @ViewBag.Title
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                @if (ViewBag.AtributosGrid != null)
+                                {
+                                    foreach (var item in @ViewBag.AtributosGrid)
+                                    {
+                                        <th>@item</th>
+                                    }
+                                }
+                                <th> - </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
