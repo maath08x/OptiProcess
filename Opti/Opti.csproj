@@ -159,6 +159,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaquinariosController.cs" />
     <Compile Include="Controllers\OrdemProducaoController.cs" />
+    <Compile Include="Controllers\PessoasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1657,6 +1658,7 @@
     <Content Include="Views\Maquinarios\Index.cshtml" />
     <Content Include="Views\Shared\CrudTemplate.cshtml" />
     <Content Include="Views\OrdemProducao\Index.cshtml" />
+    <Content Include="Views\Pessoas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
