@@ -16,7 +16,7 @@ namespace Opti.Controllers
         // GET: Maquinarios
         public ActionResult Index()
         {
-            ViewBag.Title = "Maquinarios";
+            ViewBag.Title = "Maquinários";
             ViewBag.AtributosEditable = new List<string>();
             ViewBag.AtributosSearch = new List<string>();
             ViewBag.AtributosGrid = new List<string>();
@@ -35,6 +35,7 @@ namespace Opti.Controllers
             ViewBag.AtributosGrid.Add("Status");
             ViewBag.AtributosGrid.Add("Data de Ocupação");
             ViewBag.AtributosGrid.Add("Previsão de Desocupação");
+
             return View();
         }
 

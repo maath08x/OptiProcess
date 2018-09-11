@@ -158,11 +158,26 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaquinariosController.cs" />
+    <Compile Include="Controllers\OrdemProducaoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Logins.cs" />
+    <Compile Include="Models\LoginsModel.cs" />
     <Compile Include="Models\Maquinarios.cs" />
     <Compile Include="Models\MaquinariosModel.cs" />
+    <Compile Include="Models\OrdemProducao.cs" />
+    <Compile Include="Models\OrdemProducaoModel.cs" />
+    <Compile Include="Models\OrdemProducaoProcessos.cs" />
+    <Compile Include="Models\Pedidos.cs" />
+    <Compile Include="Models\PedidosModel.cs" />
+    <Compile Include="Models\PedidosProdutos.cs" />
+    <Compile Include="Models\Pessoas.cs" />
+    <Compile Include="Models\PessoasModel.cs" />
+    <Compile Include="Models\Produtos.cs" />
+    <Compile Include="Models\ProdutosFilhos.cs" />
+    <Compile Include="Models\ProdutosMaquinarios.cs" />
+    <Compile Include="Models\ProdutosModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -180,7 +195,8 @@
     <Content Include="js\demo\chart-bar-demo.js" />
     <Content Include="js\demo\chart-pie-demo.js" />
     <Content Include="js\demo\datatables-demo.js" />
-    <Content Include="js\Maquinarios\Maquinarios.js" />
+    <Content Include="js\OrdemProducao.js" />
+    <Content Include="js\Maquinarios.js" />
     <Content Include="js\sb-admin.js" />
     <Content Include="js\sb-admin.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1640,10 +1656,10 @@
     <Content Include="vendor\jquery\jquery.slim.min.map" />
     <Content Include="Views\Maquinarios\Index.cshtml" />
     <Content Include="Views\Shared\CrudTemplate.cshtml" />
+    <Content Include="Views\OrdemProducao\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\MaquinariosModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -111,5 +111,77 @@ namespace Opti.Models
                 return "Não foi possível deletar.";
             }
         }
+
+        #region "Métodos de verificações"
+        // Este método retorna a menor data entre os maquinários do mesmo tipo
+        public DateTime? MenorData(int produtoID)
+        {
+            ProdutosModel produtosMaquinarios = new ProdutosModel();
+            List<ProdutosMaquinarios> lpm = produtosMaquinarios.PesquisarPM(produtoID);
+            DateTime? min = null;
+
+            // Verifica nos máquinarios que podem produzir aquele material, qual a menor data possível para produção
+            for (int k = 0; k < lpm.Count; k++)
+            {
+                Maquinarios m = new Maquinarios();
+                DateTime? minThis = null;
+                List<Maquinarios> lm = Pesquisar(0, "", lpm[0].tipoMaquinario);
+
+                for (int l = 0; l < lm.Count; l++)
+                {
+                    if (lm[l].statusMaquinario == 0)
+                    {
+                        continue;
+                    }
+
+                    if (minThis == null)
+                    {
+                        minThis = lm[l].dtDesocupacao;
+                    }
+                    else if (minThis != null && lm[l].dtDesocupacao != null)
+                    {
+                        if (DateTime.Compare(Convert.ToDateTime(minThis), Convert.ToDateTime(lm[l].dtDesocupacao)) > 0)
+                        {
+                            minThis = lm[l].dtDesocupacao;
+                        }
+                    }
+                }
+                if (min == null)
+                {
+                    min = minThis;
+                }
+                else if (min != null && minThis != null)
+                {
+                    if (DateTime.Compare(Convert.ToDateTime(min), Convert.ToDateTime(minThis)) > 0)
+                    {
+                        min = minThis;
+                    }
+                }
+            }
+            return min;
+        }
+
+        public void ConcluirOP(int maquinarioID, DateTime? dtPrevisao)
+        {
+            List<Maquinarios> lm = Pesquisar(maquinarioID, "", 0);
+
+            if (lm[0].dtDesocupacao == dtPrevisao)
+            {
+                lm[0].dtDesocupacao = null;
+                lm[0].statusMaquinario = 0;
+            }
+            else
+            {
+                int dts = (Convert.ToDateTime(lm[0].dtDesocupacao).Subtract(DateTime.Now)).Days;
+                if (dts > 0)
+                {
+                    lm[0].dtDesocupacao = Convert.ToDateTime(lm[0].dtDesocupacao).AddDays(dts * -1);
+                }
+            }
+
+            MaquinariosModel mm = new MaquinariosModel();
+            mm.Alterar(lm[0]);
+        }
+        #endregion
     }
 }
