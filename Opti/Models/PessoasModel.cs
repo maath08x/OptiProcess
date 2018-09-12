@@ -57,19 +57,19 @@ namespace Opti.Models
 
             if (pessoaId != 0 && nome != "")
             {
-                pessoa = from p in pm.Pessoas where p.nome == nome & p.pessoaID == pessoaId & p.tipoPessoa == tipoPessoa select p;
+                pessoa = from p in pm.Pessoas where p.nome == nome & p.pessoaID == pessoaId select p;
             }
             else if (pessoaId != 0)
             {
-                pessoa = from p in pm.Pessoas where p.pessoaID == pessoaId & p.tipoPessoa == tipoPessoa select p;
+                pessoa = from p in pm.Pessoas where p.pessoaID == pessoaId select p;
             }
             else if (nome != "")
             {
-                pessoa = from p in pm.Pessoas where p.nome.Contains(nome) & p.tipoPessoa == tipoPessoa select p;
+                pessoa = from p in pm.Pessoas where p.nome.Contains(nome) select p;
             }
             else
             {
-                pessoa = from p in pm.Pessoas where p.tipoPessoa == tipoPessoa select p;
+                pessoa = from p in pm.Pessoas select p;
             }
 
             return pessoa.ToList();
@@ -85,16 +85,23 @@ namespace Opti.Models
             return pessoa.ToList();
         }
 
-        public List<Pessoas> Inserir(Pessoas pessoa)
+        public string Adicionar(Pessoas pessoa)
         {
             PessoasModel pm = new PessoasModel();
-            pm.Pessoas.Add(pessoa);
-            pm.SaveChanges();
 
-            return pm.Pessoas.Where(e => e.pessoaID == pessoa.pessoaID).ToList();
+            try
+            {
+                pm.Pessoas.Add(pessoa);
+                pm.SaveChanges();
+                return "Pessoa cadastrada";
+            }
+            catch (Exception)
+            {
+                return "Não foi possível cadastrar esta pessoa.";
+            }
         }
 
-        public List<Pessoas> Inserir(Pessoas pessoa, Logins login)
+        public List<Pessoas> Adicionar(Pessoas pessoa, Logins login)
         {
             PessoasModel pm = new PessoasModel();
             pm.Pessoas.Add(pessoa);

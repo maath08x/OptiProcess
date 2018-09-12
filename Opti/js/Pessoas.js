@@ -46,18 +46,28 @@ function Pesquisar() {
         }
     };
 
-    var sURL = "http://" + location.host + "/Pessoas/Pesquisar?Tipo=0&" + sRequest;
+    var sURL = "http://" + location.host + "/Pessoas/Pesquisar?" + sRequest;
 
     xhttp.open("GET", sURL, true);
     xhttp.send();
 }
 
 function Adicionar() {
-    var nTipo = document.getElementById("Tipo_Add");
     var sNome = document.getElementById("Nome_Add");
+    var sFantasia = document.getElementById("Fantasia_Add");
+    var dtNascimento = document.getElementById("Nascimento_Add");
+    var sDocumento = document.getElementById("Documento_Add");
+    var sCidade = document.getElementById("Cidade_Add");
+    var sEstado = document.getElementById("Estado_Add");
+    var sRua = document.getElementById("Rua_Add");
+    var nNumero = document.getElementById("Numero_Add");
     var sDescricao = document.getElementById("Descrição_Add");
+    var sEmail = document.getElementById("Email_Add");
+    var nTelefone = document.getElementById("Telefone_Add");
 
-    var sRequest = "Tipo=" + escape(nTipo.value) + "&Nome=" + escape(sNome.value) + "&Descricao=" + escape(sDescricao.value);
+    var sRequest = "Nome=" + escape(sNome.value) + "&Fantasia=" + escape(sFantasia.value) + "&Nascimento=" + escape(dtNascimento.value) +
+        "&Documento=" + escape(sDocumento.value) + "&Cidade=" + escape(sCidade.value) + "&Estado=" + escape(sEstado.value) + "&Rua=" + escape(sRua.value) +
+        "&Numero=" + escape(nNumero.value) + "&Descricao=" + escape(sDescricao.value) + "&Email=" + escape(sEmail.value) + "&Telefone=" + escape(nTelefone.value);
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -66,7 +76,7 @@ function Adicionar() {
         }
     };
 
-    var sURL = "http://" + location.host + "/Pessoas/Adicionar?Status=0&" + sRequest;
+    var sURL = "http://" + location.host + "/Pessoas/Adicionar?" + sRequest;
 
     xhttp.open("POST", sURL, true);
     xhttp.send();

@@ -61,5 +61,27 @@ namespace Opti.Controllers
 
             return Json(lp, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public string Adicionar()
+        {
+            pessoas.cidade = Request.Params["Cidade"];
+            pessoas.documento = Convert.ToInt32(Request.Params["Documento"]);
+            pessoas.dtCadastro = DateTime.Now;
+            pessoas.email = Request.Params["Email"];
+            pessoas.estado = Request.Params["Estado"];
+            pessoas.fantasia = Request.Params["Fantasia"];
+            pessoas.nascimento = Convert.ToDateTime(Request.Params["Nascimento"]);
+            pessoas.nome = Request.Params["Nome"];
+            pessoas.numero = Request.Params["Numero"];
+            pessoas.rua = Request.Params["Rua"];
+            pessoas.telefone = Request.Params["Telefone"];
+            pessoas.tipoPessoa = Convert.ToInt32(Request.Params["Tipo"]);
+            
+
+            return pessoasModel.Adicionar(pessoas);
+        }
+
+        
     }
 }

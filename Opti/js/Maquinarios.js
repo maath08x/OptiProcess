@@ -63,7 +63,7 @@ function Pesquisar() {
         }
     };
 
-    var sURL = "http://" + location.host + "/Maquinarios/Pesquisar?Tipo=0&" + sRequest;
+    var sURL = "http://" + location.host + "/Maquinarios/Pesquisar?" + sRequest;
 
     xhttp.open("GET", sURL, true);
     xhttp.send();

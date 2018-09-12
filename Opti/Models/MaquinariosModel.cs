@@ -34,7 +34,7 @@ namespace Opti.Models
 
             if (maquinarioID != 0 && nome != "" && tipoMaquinario != -1)
             {
-                maquinario = from p in mm.Maquinarios where p.nome == nome & p.maquinarioID == maquinarioID & p.tipoMaquinario == tipoMaquinario select p;
+                maquinario = from p in mm.Maquinarios where p.nome == nome & p.maquinarioID == maquinarioID select p;
             }
             else if (maquinarioID != 0)
             {
@@ -43,10 +43,6 @@ namespace Opti.Models
             else if (nome != "")
             {
                 maquinario = from p in mm.Maquinarios where p.nome.Contains(nome) select p;
-            }
-            else if (tipoMaquinario != -1)
-            {
-                maquinario = from p in mm.Maquinarios where p.tipoMaquinario == tipoMaquinario select p;
             }
             else
             {
