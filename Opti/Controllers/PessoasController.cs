@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Opti.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace Opti.Controllers
 {
     public class PessoasController : Controller
     {
+        private static Pessoas pessoas = new Pessoas();
+        private static PessoasModel pessoasModel = new PessoasModel();
         // GET: Pessoas
         public ActionResult Index()
         {
@@ -18,7 +21,6 @@ namespace Opti.Controllers
 
             ViewBag.AtributosSearch.Add("ID");
             ViewBag.AtributosSearch.Add("Nome");
-            ViewBag.AtributosSearch.Add("Tipo");
 
             ViewBag.AtributosEditable.Add("Nome");
             ViewBag.AtributosEditable.Add("Fantasia");
@@ -34,9 +36,8 @@ namespace Opti.Controllers
 
             ViewBag.AtributosGrid.Add("ID");
             ViewBag.AtributosGrid.Add("Nome");
-            ViewBag.AtributosGrid.Add("Tipo");
-            ViewBag.AtributosGrid.Add("Nome");
             ViewBag.AtributosGrid.Add("Fantasia");
+            ViewBag.AtributosGrid.Add("Tipo");
             ViewBag.AtributosGrid.Add("Nascimento");
             ViewBag.AtributosGrid.Add("Documento");
             ViewBag.AtributosGrid.Add("Cidade");
@@ -48,6 +49,17 @@ namespace Opti.Controllers
             ViewBag.AtributosGrid.Add("Telefone");
 
             return View();
+        }
+
+        [HttpGet]
+        public JsonResult Pesquisar()
+        {
+            pessoas.pessoaID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
+            pessoas.nome = Request.Params["Nome"];
+            pessoas.tipoPessoa = Convert.ToInt32((Request.Params["Tipo"] == "" ? "0" : Request.Params["Tipo"]));
+            List<Pessoas> lp = pessoasModel.Pesquisar(pessoas.pessoaID, pessoas.nome, pessoas.tipoPessoa);
+
+            return Json(lp, JsonRequestBehavior.AllowGet);
         }
     }
 }

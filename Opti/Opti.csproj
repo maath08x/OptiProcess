@@ -196,6 +196,7 @@
     <Content Include="js\demo\chart-bar-demo.js" />
     <Content Include="js\demo\chart-pie-demo.js" />
     <Content Include="js\demo\datatables-demo.js" />
+    <Content Include="js\Pessoas.js" />
     <Content Include="js\OrdemProducao.js" />
     <Content Include="js\Maquinarios.js" />
     <Content Include="js\sb-admin.js" />
