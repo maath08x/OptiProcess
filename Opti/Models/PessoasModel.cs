@@ -55,7 +55,7 @@ namespace Opti.Models
             PessoasModel pm = new PessoasModel();
             IEnumerable<Pessoas> pessoa;
 
-            if (pessoaId != 0 && nome != "")
+            if (pessoaId != 0 && nome != "" && nome != null)
             {
                 pessoa = from p in pm.Pessoas where p.nome == nome & p.pessoaID == pessoaId select p;
             }

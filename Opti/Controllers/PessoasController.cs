@@ -82,6 +82,34 @@ namespace Opti.Controllers
             return pessoasModel.Adicionar(pessoas);
         }
 
-        
+        [HttpPost]
+        public string Alterar()
+        {
+            pessoas.pessoaID = Convert.ToInt32(Request.Params["ID"]);
+            pessoas.cidade = Request.Params["Cidade"];
+            pessoas.documento = Convert.ToInt32(Request.Params["Documento"]);
+            pessoas.dtCadastro = DateTime.Now;
+            pessoas.email = Request.Params["Email"];
+            pessoas.estado = Request.Params["Estado"];
+            pessoas.fantasia = Request.Params["Fantasia"];
+            pessoas.nascimento = Convert.ToDateTime(Request.Params["Nascimento"]);
+            pessoas.nome = Request.Params["Nome"];
+            pessoas.numero = Request.Params["Numero"];
+            pessoas.rua = Request.Params["Rua"];
+            pessoas.telefone = Request.Params["Telefone"];
+            pessoas.tipoPessoa = Convert.ToInt32(Request.Params["Tipo"]);
+
+
+            return pessoasModel.Alterar(pessoas);
+        }
+
+        [HttpPost]
+        public string Deletar()
+        {
+            pessoas.pessoaID = Convert.ToInt32(Request.Params["ID"]);
+            return pessoasModel.Deletar(pessoas.pessoaID,0);
+        }
+
+
     }
 }
