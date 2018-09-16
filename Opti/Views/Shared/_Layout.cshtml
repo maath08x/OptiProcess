@@ -18,7 +18,7 @@
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-        <a class="navbar-brand mr-1" href="index.html">OptiProcess</a>
+        <a class="navbar-brand mr-1" href="@Url.Action("Index", "Home")">OptiProcess</a>
         <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
             <i class="fas fa-bars"></i>
         </button>
@@ -56,7 +56,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="@Url.Action("Index","Pedidos")">
                     <i class="fas fa-fw fa-shopping-cart"></i>
                     <span>Pedidos</span>
                 </a>

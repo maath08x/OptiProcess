@@ -159,6 +159,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaquinariosController.cs" />
     <Compile Include="Controllers\OrdemProducaoController.cs" />
+    <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\PessoasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -196,6 +197,7 @@
     <Content Include="js\demo\chart-bar-demo.js" />
     <Content Include="js\demo\chart-pie-demo.js" />
     <Content Include="js\demo\datatables-demo.js" />
+    <Content Include="js\Pedidos.js" />
     <Content Include="js\Pessoas.js" />
     <Content Include="js\OrdemProducao.js" />
     <Content Include="js\Maquinarios.js" />
@@ -1660,6 +1662,7 @@
     <Content Include="Views\Shared\CrudTemplate.cshtml" />
     <Content Include="Views\OrdemProducao\Index.cshtml" />
     <Content Include="Views\Pessoas\Index.cshtml" />
+    <Content Include="Views\Pedidos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

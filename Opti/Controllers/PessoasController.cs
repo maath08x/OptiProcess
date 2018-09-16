@@ -16,6 +16,7 @@ namespace Opti.Controllers
         {
             ViewBag.Title = "Pessoas";
             ViewBag.AtributosEditable = new List<string>();
+            ViewBag.AtributosAdd = new List<string>();
             ViewBag.AtributosSearch = new List<string>();
             ViewBag.AtributosGrid = new List<string>();
 
@@ -33,6 +34,18 @@ namespace Opti.Controllers
             ViewBag.AtributosEditable.Add("Descrição");
             ViewBag.AtributosEditable.Add("Email");
             ViewBag.AtributosEditable.Add("Telefone");
+
+            ViewBag.AtributosAdd.Add("Nome");
+            ViewBag.AtributosAdd.Add("Fantasia");
+            ViewBag.AtributosAdd.Add("Nascimento");
+            ViewBag.AtributosAdd.Add("Documento");
+            ViewBag.AtributosAdd.Add("Cidade");
+            ViewBag.AtributosAdd.Add("Estado");
+            ViewBag.AtributosAdd.Add("Rua");
+            ViewBag.AtributosAdd.Add("Numero");
+            ViewBag.AtributosAdd.Add("Descrição");
+            ViewBag.AtributosAdd.Add("Email");
+            ViewBag.AtributosAdd.Add("Telefone");
 
             ViewBag.AtributosGrid.Add("ID");
             ViewBag.AtributosGrid.Add("Nome");

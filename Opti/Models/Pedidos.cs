@@ -1,5 +1,6 @@
 namespace Opti.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -28,6 +29,7 @@ namespace Opti.Models
         public bool finalizado { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<PedidosProdutos> PedidosProdutos { get; set; }
     }
 }

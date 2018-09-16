@@ -18,6 +18,7 @@ namespace Opti.Controllers
         {
             ViewBag.Title = "Maquinários";
             ViewBag.AtributosEditable = new List<string>();
+            ViewBag.AtributosAdd = new List<string>();
             ViewBag.AtributosSearch = new List<string>();
             ViewBag.AtributosGrid = new List<string>();
 
@@ -27,6 +28,10 @@ namespace Opti.Controllers
             ViewBag.AtributosEditable.Add("Nome");
             ViewBag.AtributosEditable.Add("Tipo");
             ViewBag.AtributosEditable.Add("Descrição");
+
+            ViewBag.AtributosAdd.Add("Nome");
+            ViewBag.AtributosAdd.Add("Tipo");
+            ViewBag.AtributosAdd.Add("Descrição");
 
             ViewBag.AtributosGrid.Add("ID");
             ViewBag.AtributosGrid.Add("Nome");

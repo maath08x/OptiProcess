@@ -52,12 +52,15 @@ namespace Opti.Models
             return pedido.ToList();
         }
 
-        public List<PedidosProdutos> Pesquisar(int pedidoID)
+        public List<PedidosProdutos> PesquisarPedidosProdutos(int pedidoID, int pedProdutosID)
         {
             PedidosModel pm = new PedidosModel();
             IEnumerable<PedidosProdutos> pp;
 
-            pp = from p in pm.PedidosProdutos where p.pedidoID == pedidoID select p;
+            if (pedProdutosID != 0)
+                pp = from p in pm.PedidosProdutos where p.pedProdutosID == pedProdutosID select p;
+            else
+                pp = from p in pm.PedidosProdutos where p.pedidoID == pedidoID select p;
 
             return pp.ToList();
         }
@@ -67,8 +70,11 @@ namespace Opti.Models
             PedidosModel pm = new PedidosModel();
             try
             {
-                pm.Pedidos.Add(p);
-                pm.SaveChanges();
+                if (p.pedidoID == 0)
+                {
+                    pm.Pedidos.Add(p);
+                    pm.SaveChanges();
+                }
 
                 for (int i = 0; i < lpp.Count(); i++)
                 {
@@ -89,9 +95,9 @@ namespace Opti.Models
             PedidosModel pm = new PedidosModel();
             Pedidos pedidos = pm.Pedidos.Single(c => c.pedidoID.Equals(p.pedidoID));
 
-            pedidos.dtPrevisao = p.dtPrevisao;
-            pedidos.pessoaID = p.pessoaID;
-            pedidos.finalizado = p.finalizado;
+            pedidos.dtPrevisao = (p.dtPrevisao == Convert.ToDateTime("01/01/2001") ? pedidos.dtPrevisao : p.dtPrevisao);
+            pedidos.pessoaID = (p.pessoaID == 0 ? pedidos.pessoaID : p.pessoaID);
+            pedidos.finalizado = (p.finalizado == null ? pedidos.finalizado : p.finalizado);
 
             try
             {
@@ -179,7 +185,7 @@ namespace Opti.Models
         {
             PedidosModel pm = new PedidosModel();
             List<Pedidos> lp = pm.Pesquisar(pedidoID, 0);
-            List<PedidosProdutos> lpp = pm.Pesquisar(pedidoID);
+            List<PedidosProdutos> lpp = pm.PesquisarPedidosProdutos(pedidoID,0);
 
             string retorno = Verifica(lpp);
 
