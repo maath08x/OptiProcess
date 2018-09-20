@@ -70,6 +70,8 @@ namespace Opti.Models
             PedidosModel pm = new PedidosModel();
             try
             {
+                p.dtPedido = DateTime.Now;
+
                 if (p.pedidoID == 0)
                 {
                     pm.Pedidos.Add(p);
@@ -191,8 +193,11 @@ namespace Opti.Models
 
             if (p.pedidoOk)
             {
+                DateTime dtPrevisao = DateTime.Now;
+                dtPrevisao = dtPrevisao.AddDays(leadTime);
+
                 lp[0].dtPrevisao = DateTime.Now;
-                lp[0].dtPrevisao = lp[0].dtPrevisao.AddDays(leadTime);
+                lp[0].dtPrevisao = dtPrevisao;
                 lp[0].finalizado = true;
                 Alterar(lp[0]);
 

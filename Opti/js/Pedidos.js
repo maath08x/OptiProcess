@@ -38,7 +38,12 @@ function Pesquisar() {
                 sInner += "<td id=\"finalizado" + i + "\">" + (response[i]["finalizado"] == true ? "Sim" : "Não") + "</td>";
 
                 sInner += "<td id=\"btn" + i + "\"><button type=\"button\" class=\"btn btn-primary d-md-inline-block form-inline mr-0 mr-md-2 ml-3\" data-toggle=\"modal\" data-target=\"#editModal\" onclick=\"idAtual(" + response[i]["pedidoID"] + ")\"><div class=\"fas fa-fw fa-pen\"></div></button>" +
-                    "<button type=\"button\" class=\"btn btn-primary d-md-inline-block form-inline mr-0 mr-md-2 ml-3\" data-toggle=\"modal\" data-target=\"#detailPedidosModal\" onclick=\"idAtualDetail(" + response[i]["pedidoID"] + ")\"><div class=\"fas fa-fw fa-book-open\"></div></button></td > ";
+                    "<button type=\"button\" class=\"btn btn-primary d-md-inline-block form-inline mr-0 mr-md-2 ml-3\" data-toggle=\"modal\" data-target=\"#detailPedidosModal\" onclick=\"idAtualDetail(" + response[i]["pedidoID"] + ")\"><div class=\"fas fa-fw fa-book-open\"></div></button>";
+
+                if (!response[i]["finalizado"])
+                    sInner += "<button type=\"button\" class=\"btn btn-primary d-md-inline-block form-inline mr-0 mr-md-2 ml-3\" onclick=\"finalizarPedido(" + response[i]["pedidoID"] + ")\"><div class=\"fas fa-fw fa-check\"></div></button></td > ";
+                else
+                    sInner += "</td>";
 
                 sInner += "</tr>";
             }
@@ -252,6 +257,41 @@ function Deletar() {
     }
 
     var sURL = "http://" + location.host + "/Pedidos/DeletarPedido?" + sRequest;
+
+    xhttp.open("POST", sURL, true);
+    xhttp.send();
+}
+
+function Adicionar() {
+    var nPessoaID = document.getElementById("PessoaID_Add");
+    var nTipo = document.getElementById("Tipo_Add");
+
+    var sRequest = "PessoaID=" + escape(nPessoaID.value) + "&Tipo=" + nTipo.value;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            alert(xhttp.responseText);
+        }
+    }
+
+    var sURL = "http://" + location.host + "/Pedidos/AdicionarPedido?" + sRequest;
+
+    xhttp.open("POST", sURL, true);
+    xhttp.send();
+}
+
+function finalizarPedido(nPedidoID) {
+    var sRequest = "PedidoID=" + nPedidoID;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            alert(xhttp.responseText);
+        }
+    }
+
+    var sURL = "http://" + location.host + "/Pedidos/FinalizarPedido?" + sRequest;
 
     xhttp.open("POST", sURL, true);
     xhttp.send();

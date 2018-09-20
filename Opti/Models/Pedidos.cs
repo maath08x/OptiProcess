@@ -24,7 +24,7 @@ namespace Opti.Models
 
         public DateTime dtPedido { get; set; }
 
-        public DateTime dtPrevisao { get; set; }
+        public DateTime? dtPrevisao { get; set; }
 
         public bool finalizado { get; set; }
 

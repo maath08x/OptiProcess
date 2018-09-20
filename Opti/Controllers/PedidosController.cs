@@ -36,6 +36,9 @@ namespace Opti.Controllers
 
             ViewBag.AtributosEditable.Add("Pessoa ID");
 
+            ViewBag.AtributosAddDiff.Add("Pessoa ID");
+            ViewBag.AtributosAddDiff.Add("Tipo");
+
             return View();
         }
 
@@ -109,6 +112,24 @@ namespace Opti.Controllers
             int PedidoID = Convert.ToInt32((Request.Params["PedidoID"] == "" ? "0" : Request.Params["PedidoID"]));
 
             return pedidosModel.Deletar(PedidoID);
+        }
+
+        [HttpPost]
+        public string AdicionarPedido()
+        {
+            pedidos.pessoaID = Convert.ToInt32((Request.Params["PessoaID"] == "" ? "0" : Request.Params["PessoaID"]));
+            pedidos.tipoPedido = Convert.ToInt32((Request.Params["Tipo"] == "" ? "0" : Request.Params["Tipo"]));
+            List<PedidosProdutos> lpp = new List<PedidosProdutos>();
+
+            return pedidosModel.Adicionar(pedidos, lpp);
+        }
+
+        [HttpPost]
+        public string FinalizarPedido()
+        {
+            pedidos.pedidoID = Convert.ToInt32((Request.Params["PedidoID"] == "" ? "0" : Request.Params["PedidoID"]));
+
+            return pedidosModel.VerificaFinaliza(pedidos.pedidoID);
         }
     }
 }
