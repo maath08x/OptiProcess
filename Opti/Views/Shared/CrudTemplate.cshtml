@@ -12,16 +12,20 @@
                 foreach (var item in @ViewBag.AtributosSearch)
                 {
                     string n = (@item + "_Search");
-                    n = n.Replace(" ","");
+                    n = n.Replace(" ", "");
                     <input type="text" class="form-control col-md-2 mr-md-3 ml-3" placeholder="@item" id="@n" />
                 }
             }
             <div class="row">
                 <button type="button" class="btn btn-primary d-md-inline-block form-inline mr-0 mr-md-3 ml-3" onclick="return Pesquisar();"><div class="fas fa-fw fa-search"></div></button>
-                
-                @if (ViewBag.AtributosEditable != null)
+
+                @if (ViewBag.AtributosAdd != null)
                 {
                     <button type="button" class="btn btn-primary d-md-inline-block form-inline mr-0 mr-md-2 ml-3" data-toggle="modal" data-target="#addModal"><div class="fas fa-fw fa-plus"></div></button>
+                }
+                @if (ViewBag.AtributosAddDiff != null)
+                {
+                    <button type="button" class="btn btn-primary d-md-inline-block form-inline mr-0 mr-md-2 ml-3" data-toggle="modal" data-target="#addDiffModal"><div class="fas fa-fw fa-plus"></div></button>
                 }
             </div>
         </ol>
@@ -38,9 +42,9 @@
                     </button>
                 </div>
                 <div class="modal-body form-row">
-                    @if (ViewBag.AtributosEditable != null)
+                    @if (ViewBag.AtributosAdd != null)
                     {
-                        foreach (var item in @ViewBag.AtributosEditable)
+                        foreach (var item in @ViewBag.AtributosAdd)
                         {
                             string n = @item + "_Add";
                             n = n.Replace(" ", "");
