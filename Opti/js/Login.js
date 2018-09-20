@@ -18,7 +18,7 @@
                     
                     window.localStorage.setItem("usuario", usuario);
 
-                    var urlEntrar = window.location.pathname.replace("Login", "");
+                    var urlEntrar = "http://" + location.host;
 
                     window.location.href = (urlEntrar);
 
@@ -55,26 +55,3 @@ function sair() {
 
     window.location.href = (urlsair);
 }
-/*
-function Alterar() {
-    var nID = glb_nMaquinarioID;
-    var sNome = document.getElementById("Nome_Edit");
-    var nTipo = document.getElementById("Tipo_Edit");
-    var sDescricao = document.getElementById("Descrição_Edit");
-
-    var sRequest = "ID=" + escape(nID) + "&Nome=" + escape(sNome.value) + "&Descricao=" + escape(sDescricao.value) + "&Tipo=" + escape(nTipo.value);
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            alert(xhttp.responseText);
-        }
-    }
-
-    var sURL = "http://" + location.host + "/Maquinarios/Alterar?" + sRequest;
-
-    xhttp.open("POST", sURL, true);
-    xhttp.send();
-}
-
-*/

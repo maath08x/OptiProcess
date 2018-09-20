@@ -301,10 +301,8 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
   position: absolute;
   top: 0;
   left: 0;
-  display: block;
-  width: 100%;
+  display: block; 
   margin-bottom: 0;
-  /* Override default `<label>` margin */
   line-height: 1.5;
   color: #495057;
   border: 1px solid transparent;

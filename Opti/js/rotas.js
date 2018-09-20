@@ -1,16 +1,19 @@
 ﻿function rediLogin() {
 
-    var urlEntrar = window.location.pathname.replace("UsuarioCad", "") + "Login";
+    
+    window.localStorage.removeItem("usuario");
 
-    window.location.href = (urlEntrar);
+    var urlsair = "http://" + location.host + "/Login";
 
+    window.location.href = (urlsair);
 }
 
 function rediCad() {
 
-    var urlEntrar = window.location.pathname.replace("Login", "") + "UsuarioCad";
+ 
+    var urlsair = "http://" + location.host + "/UsuarioCad";
 
-    window.location.href = (urlEntrar);
+    window.location.href = (urlsair);
 
 }
 
@@ -18,14 +21,17 @@ function validaAcesso() {
 
     var usuario = window.localStorage.getItem("usuario");
 
-    if (usuario != "") {
+    if (usuario != null) {
+
+        toastr.info("", "Sua Sessão Expirou !")  
 
     } else {
+        
+        var urlsair = "http://" + location.host + "/Login";
 
-        var urlEntrar = "localhost:59946/Login";
+        window.location.href = (urlsair);
 
-        window.location.href = (urlEntrar);
-
+        toastr.success("", "Bem Vindo " + usuario)
     }
 
 }
