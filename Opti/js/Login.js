@@ -50,7 +50,8 @@ function sair() {
 
     window.localStorage.removeItem("usuario");
     
-    var urlsair = window.location.pathname + "Login";
+    var urlsair = "http://" + location.host + "/Login";
+    
 
     window.location.href = (urlsair);
 }
