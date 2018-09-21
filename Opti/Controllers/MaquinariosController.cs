@@ -21,6 +21,7 @@ namespace Opti.Controllers
             ViewBag.AtributosAdd = new List<string>();
             ViewBag.AtributosSearch = new List<string>();
             ViewBag.AtributosGrid = new List<string>();
+            ViewBag.AtributosConfig = new List<string>();
 
             ViewBag.AtributosSearch.Add("ID");
             ViewBag.AtributosSearch.Add("Nome");
@@ -40,6 +41,8 @@ namespace Opti.Controllers
             ViewBag.AtributosGrid.Add("Status");
             ViewBag.AtributosGrid.Add("Data de Ocupação");
             ViewBag.AtributosGrid.Add("Previsão de Desocupação");
+
+
 
             return View();
         }

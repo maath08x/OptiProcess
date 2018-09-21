@@ -130,4 +130,3 @@ function idAtual(nMaquinarioID) {
     xhttp.open("GET", sURL, true);
     xhttp.send();
 }
-

@@ -163,6 +163,7 @@
     <Compile Include="Controllers\OrdemProducaoController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\PessoasController.cs" />
+    <Compile Include="Controllers\TiposGeraisController.cs" />
     <Compile Include="Controllers\UsuarioCadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -183,6 +184,8 @@
     <Compile Include="Models\ProdutosFilhos.cs" />
     <Compile Include="Models\ProdutosMaquinarios.cs" />
     <Compile Include="Models\ProdutosModel.cs" />
+    <Compile Include="Models\TiposGerais.cs" />
+    <Compile Include="Models\TiposGeraisModel.cs" />
     <Compile Include="Models\Usuarios.cs" />
     <Compile Include="Models\UsuariosModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -203,6 +206,7 @@
     <Content Include="js\demo\chart-bar-demo.js" />
     <Content Include="js\demo\chart-pie-demo.js" />
     <Content Include="js\demo\datatables-demo.js" />
+    <Content Include="js\TiposGerais.js" />
     <Content Include="js\Pedidos.js" />
     <Content Include="js\Pessoas.js" />
     <Content Include="js\Login.js" />
@@ -1676,6 +1680,7 @@
     <Content Include="Views\Pedidos\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\UsuarioCad\Index.cshtml" />
+    <Content Include="Views\TiposGerais\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
