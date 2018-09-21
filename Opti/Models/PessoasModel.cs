@@ -177,7 +177,7 @@ namespace Opti.Models
             {
                 Pessoas pessoa = pm.Pessoas.Single(c => c.pessoaID.Equals(pessoaID));
 
-                if (tipoPessoa == 2)
+                if (tipoPessoa == 8)
                 {
                     LoginsModel login = new LoginsModel();
                     login.Deletar(pessoaID);

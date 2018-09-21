@@ -32,7 +32,7 @@ namespace Opti.Models
 
             IEnumerable<Maquinarios> maquinario = null;
 
-            if (maquinarioID != 0 && nome != "" && tipoMaquinario != -1)
+            if (maquinarioID != 0 && nome != "" && tipoMaquinario != 0)
             {
                 maquinario = from p in mm.Maquinarios where p.nome == nome & p.maquinarioID == maquinarioID select p;
             }
