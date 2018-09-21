@@ -163,6 +163,7 @@
     <Compile Include="Controllers\OrdemProducaoController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\PessoasController.cs" />
+    <Compile Include="Controllers\ProdutosController.cs" />
     <Compile Include="Controllers\TiposGeraisController.cs" />
     <Compile Include="Controllers\UsuarioCadController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1681,10 +1682,10 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\UsuarioCad\Index.cshtml" />
     <Content Include="Views\TiposGerais\Index.cshtml" />
+    <Content Include="Views\Produtos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Produtos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
