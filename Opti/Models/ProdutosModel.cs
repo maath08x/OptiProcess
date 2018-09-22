@@ -65,7 +65,7 @@ namespace Opti.Models
             ProdutosModel pm = new ProdutosModel();
             IEnumerable<Produtos> produto;
 
-            if (produtoID != 0 && nome != "")
+            if (produtoID != 0 && nome != "" && nome != null)
             {
                 produto = from p in pm.Produtos where p.nome == nome & p.produtoID == produtoID select p;
             }
@@ -119,13 +119,20 @@ namespace Opti.Models
             return produtoMaquinario.ToList();
         }
 
-        public List<Produtos> Adicionar(Produtos p)
+        public string Adicionar(Produtos p)
         {
             ProdutosModel pm = new ProdutosModel();
-            pm.Produtos.Add(p);
-            pm.SaveChanges();
 
-            return pm.Pesquisar(p.produtoID, "");
+            try
+            {
+                pm.Produtos.Add(p);
+                pm.SaveChanges();
+                return "Produto incluído.";
+            }
+            catch (Exception e)
+            {
+                return "Não foi possível inserir este produto.";
+            }
         }
 
         public List<ProdutosFilhos> Adicionar(ProdutosFilhos pf)
