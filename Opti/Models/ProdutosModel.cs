@@ -85,12 +85,16 @@ namespace Opti.Models
             return produto.ToList();
         }
 
-        public List<ProdutosFilhos> PesquisarFilho(int produtoID)
+        public List<ProdutosFilhos> PesquisarFilho(int produtoID, int produtoFilhoID)
         {
             ProdutosModel pm = new ProdutosModel();
             IEnumerable<ProdutosFilhos> produtoFilho;
 
-            if (produtoID != 0)
+            if(produtoFilhoID != 0)
+            {
+                produtoFilho = from p in pm.ProdutosFilhos where p.produtosFilhosID == produtoFilhoID select p;
+            }
+            else if (produtoID != 0)
             {
                 produtoFilho = from p in pm.ProdutosFilhos where p.produtoID == produtoID select p;
             }
@@ -135,13 +139,35 @@ namespace Opti.Models
             }
         }
 
-        public List<ProdutosFilhos> Adicionar(ProdutosFilhos pf)
+        public string Adicionar(ProdutosFilhos pf)
         {
             ProdutosModel pm = new ProdutosModel();
-            pm.ProdutosFilhos.Add(pf);
-            pm.SaveChanges();
+            try
+            {
+                pm.ProdutosFilhos.Add(pf);
+                pm.SaveChanges();
+                return "Produto incluído.";
+            }
+            catch (Exception e)
+            {
+                return "Não foi possível inserir este produto.";
+            }
+        }
 
-            return pm.PesquisarFilho(pf.produtoID);
+        public string Adicionar(ProdutosMaquinarios p)
+        {
+            ProdutosModel pm = new ProdutosModel();
+
+            try
+            {
+                pm.ProdutosMaquinarios.Add(p);
+                pm.SaveChanges();
+                return "Produto incluído.";
+            }
+            catch (Exception e)
+            {
+                return "Não foi possível inserir este produto.";
+            }
         }
 
         public string Alterar(Produtos p)
@@ -219,6 +245,25 @@ namespace Opti.Models
                 pm.SaveChanges();
 
                 return "Produto removido.";
+            }
+            catch (Exception e)
+            {
+                return "Não foi possível remover";
+            }
+        }
+
+        public string DeletarProdutoMaquinario(int produtosMaquinariosID)
+        {
+            try
+            {
+                ProdutosModel pm = new ProdutosModel();
+                ProdutosMaquinarios produtosMaquinarios = pm.ProdutosMaquinarios.Single(c => c.produtosMaquinariosID.Equals(produtosMaquinariosID));
+
+                pm.ProdutosMaquinarios.Remove(produtosMaquinarios);
+
+                pm.SaveChanges();
+
+                return "Tipo removido.";
             }
             catch (Exception e)
             {
@@ -390,7 +435,7 @@ namespace Opti.Models
             else
             {
                 ProdutosModel pf = new ProdutosModel();
-                List<ProdutosFilhos> lpf = pf.PesquisarFilho(produtoID);
+                List<ProdutosFilhos> lpf = pf.PesquisarFilho(produtoID,0);
                 // Se não tem produtos "filhos" é necessário comprar.
                 if (lpf.Count == 0)
                 {

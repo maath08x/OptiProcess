@@ -12,6 +12,7 @@ namespace Opti.Controllers
     {
         private static Produtos produtos = new Produtos();
         private static ProdutosFilhos produtosFilhos = new ProdutosFilhos();
+        private static ProdutosMaquinarios produtosMaquinarios = new ProdutosMaquinarios();
         private static ProdutosModel produtosModel = new ProdutosModel();
         // GET: Produtos
         public ActionResult Index()
@@ -51,6 +52,23 @@ namespace Opti.Controllers
             return produtosModel.Adicionar(produtos);
         }
 
+        [HttpPost]
+        public string AdicionarSubProdutos()
+        {
+            produtosFilhos.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
+            produtosFilhos.filhoID = Convert.ToInt32((Request.Params["SubProdutoID"] == "" ? "0" : Request.Params["SubProdutoID"]));
+            produtosFilhos.quantidade = Convert.ToInt32((Request.Params["Quantidade"] == "" ? "0" : Request.Params["Quantidade"]));
+            return produtosModel.Adicionar(produtosFilhos);
+        }
+
+        [HttpPost]
+        public string AdicionarMaqProdutos()
+        {
+            produtosMaquinarios.tipoMaquinario = Convert.ToInt32((Request.Params["TipoMaqProdutoID"] == "" ? "0" : Request.Params["TipoMaqProdutoID"]));
+            produtosMaquinarios.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
+            return produtosModel.Adicionar(produtosMaquinarios);
+        }
+
         [HttpGet]
         public string Pesquisar()
         {
@@ -66,8 +84,20 @@ namespace Opti.Controllers
         [HttpGet]
         public string PesquisarProdutosFilhos()
         {
+            produtosFilhos.produtosFilhosID = Convert.ToInt32((Request.Params["ProdutoID"] == "" ? "0" : Request.Params["ProdutoID"]));
+            produtosFilhos.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
+            List<ProdutosFilhos> lpf = produtosModel.PesquisarFilho(produtosFilhos.produtoID, produtosFilhos.produtosFilhosID);
+
+            string txt = JsonConvert.SerializeObject(lpf);
+
+            return txt;
+        }
+
+        [HttpGet]
+        public string PesquisarProdutosMaquinarios()
+        {
             produtos.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
-            List<ProdutosFilhos> lpf = produtosModel.PesquisarFilho(produtos.produtoID);
+            List<ProdutosMaquinarios> lpf = produtosModel.PesquisarPM(produtos.produtoID);
 
             string txt = JsonConvert.SerializeObject(lpf);
 
@@ -84,10 +114,35 @@ namespace Opti.Controllers
         }
 
         [HttpPost]
+        public string AlterarSubProdutos()
+        {
+            produtosFilhos.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
+            produtosFilhos.filhoID = Convert.ToInt32((Request.Params["SubProdutoID"] == "" ? "0" : Request.Params["SubProdutoID"]));
+            produtosFilhos.quantidade = Convert.ToInt32((Request.Params["Quantidade"] == "" ? "0" : Request.Params["Quantidade"]));
+            return produtosModel.Alterar(produtosFilhos);
+        }
+
+
+        [HttpPost]
         public string Deletar()
         {
             produtos.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
             return produtosModel.Deletar(produtos.produtoID);
         }
+
+        [HttpPost]
+        public string DeletarSubProdutos()
+        {
+            produtosFilhos.produtosFilhosID = Convert.ToInt32((Request.Params["SubProdutoID"] == "" ? "0" : Request.Params["SubProdutoID"]));
+            return produtosModel.DeletarFilho(produtosFilhos.produtosFilhosID);
+        }
+
+        [HttpPost]
+        public string DeletarMaqProdutos()
+        {
+            produtosMaquinarios.produtosMaquinariosID = Convert.ToInt32((Request.Params["MaqProdutoID"] == "" ? "0" : Request.Params["MaqProdutoID"]));
+            return produtosModel.DeletarProdutoMaquinario(produtosMaquinarios.produtosMaquinariosID);
+        }
+        
     }
 }
