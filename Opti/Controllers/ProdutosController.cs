@@ -1,4 +1,5 @@
-﻿using Opti.Models;
+﻿using Newtonsoft.Json;
+using Opti.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Opti.Controllers
     {
         private static Produtos produtos = new Produtos();
         private static ProdutosFilhos produtosFilhos = new ProdutosFilhos();
+        private static ProdutosMaquinarios produtosMaquinarios = new ProdutosMaquinarios();
         private static ProdutosModel produtosModel = new ProdutosModel();
         // GET: Produtos
         public ActionResult Index()
@@ -19,11 +21,128 @@ namespace Opti.Controllers
             ViewBag.AtributosSearch = new List<string>();
             ViewBag.AtributosGrid = new List<string>();
             ViewBag.AtributosEditable = new List<string>();
-            ViewBag.AtributosAddDiff = new List<string>();
+            ViewBag.AtributosAdd = new List<string>();
 
+            ViewBag.AtributosSearch.Add("ID");
+            ViewBag.AtributosSearch.Add("Nome");
 
+            ViewBag.AtributosGrid.Add("ID");
+            ViewBag.AtributosGrid.Add("Nome");
+            ViewBag.AtributosGrid.Add("Descrição");
+            ViewBag.AtributosGrid.Add("Estoque");
+            ViewBag.AtributosGrid.Add("LeadTime");
+
+            ViewBag.AtributosEditable.Add("Nome");
+            ViewBag.AtributosEditable.Add("Descrição");
+            ViewBag.AtributosEditable.Add("LeadTime");
+            
+            ViewBag.AtributosAdd.Add("Nome");
+            ViewBag.AtributosAdd.Add("Descrição");
+            ViewBag.AtributosAdd.Add("LeadTime");
 
             return View();
         }
+
+        [HttpPost]
+        public string Adicionar()
+        {
+            produtos.descricao = Request.Params["Descricao"];
+            produtos.leadTime = Convert.ToInt32((Request.Params["LeadTime"] == "" ? "0" : Request.Params["LeadTime"]));
+            produtos.nome = Request.Params["Nome"];
+            return produtosModel.Adicionar(produtos);
+        }
+
+        [HttpPost]
+        public string AdicionarSubProdutos()
+        {
+            produtosFilhos.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
+            produtosFilhos.filhoID = Convert.ToInt32((Request.Params["SubProdutoID"] == "" ? "0" : Request.Params["SubProdutoID"]));
+            produtosFilhos.quantidade = Convert.ToInt32((Request.Params["Quantidade"] == "" ? "0" : Request.Params["Quantidade"]));
+            return produtosModel.Adicionar(produtosFilhos);
+        }
+
+        [HttpPost]
+        public string AdicionarMaqProdutos()
+        {
+            produtosMaquinarios.tipoMaquinario = Convert.ToInt32((Request.Params["TipoMaqProdutoID"] == "" ? "0" : Request.Params["TipoMaqProdutoID"]));
+            produtosMaquinarios.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
+            return produtosModel.Adicionar(produtosMaquinarios);
+        }
+
+        [HttpGet]
+        public string Pesquisar()
+        {
+            produtos.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
+            produtos.nome = Request.Params["Nome"];
+            List<Produtos> lp = produtosModel.Pesquisar(produtos.produtoID, produtos.nome);
+
+            string txt = JsonConvert.SerializeObject(lp);
+
+            return txt;
+        }
+
+        [HttpGet]
+        public string PesquisarProdutosFilhos()
+        {
+            produtosFilhos.produtosFilhosID = Convert.ToInt32((Request.Params["ProdutoID"] == "" ? "0" : Request.Params["ProdutoID"]));
+            produtosFilhos.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
+            List<ProdutosFilhos> lpf = produtosModel.PesquisarFilho(produtosFilhos.produtoID, produtosFilhos.produtosFilhosID);
+
+            string txt = JsonConvert.SerializeObject(lpf);
+
+            return txt;
+        }
+
+        [HttpGet]
+        public string PesquisarProdutosMaquinarios()
+        {
+            produtos.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
+            List<ProdutosMaquinarios> lpf = produtosModel.PesquisarPM(produtos.produtoID);
+
+            string txt = JsonConvert.SerializeObject(lpf);
+
+            return txt;
+        }
+
+        [HttpPost]
+        public string Alterar()
+        {
+            produtos.descricao = Request.Params["Descricao"];
+            produtos.leadTime = Convert.ToInt32((Request.Params["LeadTime"] == "" ? "0" : Request.Params["LeadTime"]));
+            produtos.nome = Request.Params["Nome"];
+            return produtosModel.Alterar(produtos);
+        }
+
+        [HttpPost]
+        public string AlterarSubProdutos()
+        {
+            produtosFilhos.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
+            produtosFilhos.filhoID = Convert.ToInt32((Request.Params["SubProdutoID"] == "" ? "0" : Request.Params["SubProdutoID"]));
+            produtosFilhos.quantidade = Convert.ToInt32((Request.Params["Quantidade"] == "" ? "0" : Request.Params["Quantidade"]));
+            return produtosModel.Alterar(produtosFilhos);
+        }
+
+
+        [HttpPost]
+        public string Deletar()
+        {
+            produtos.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
+            return produtosModel.Deletar(produtos.produtoID);
+        }
+
+        [HttpPost]
+        public string DeletarSubProdutos()
+        {
+            produtosFilhos.produtosFilhosID = Convert.ToInt32((Request.Params["SubProdutoID"] == "" ? "0" : Request.Params["SubProdutoID"]));
+            return produtosModel.DeletarFilho(produtosFilhos.produtosFilhosID);
+        }
+
+        [HttpPost]
+        public string DeletarMaqProdutos()
+        {
+            produtosMaquinarios.produtosMaquinariosID = Convert.ToInt32((Request.Params["MaqProdutoID"] == "" ? "0" : Request.Params["MaqProdutoID"]));
+            return produtosModel.DeletarProdutoMaquinario(produtosMaquinarios.produtosMaquinariosID);
+        }
+        
     }
 }
