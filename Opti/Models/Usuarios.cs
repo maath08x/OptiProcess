@@ -10,9 +10,10 @@ namespace Opti.Models
     {
 
         [Key]
-        public int pessoaID { get; set; }
+        public int loginID { get; set; }
 
-        public int tipoPessoa { get; set; }
+        [Key]
+        public int pessoaID { get; set; }
 
         [Required]
         [StringLength(50)]

@@ -14,6 +14,11 @@ namespace Opti.Controllers
             return View();
         }
 
+        public ActionResult Alterar()
+        {
+            return View();
+        }
+
         /*
         [HttpPost]
         public string Adicionar()
@@ -36,6 +41,6 @@ namespace Opti.Controllers
             return maquinariosModel.Alterar(maquinarios);
         }
         */
-      
+
     }
 }

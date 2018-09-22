@@ -1,11 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿
 
 namespace Opti.Models
 {
-    public class UsuariosModel
+    using System;
+    using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+    using System.Collections.Generic;
+
+    public class UsuariosModel : DbContext
     {
+        //public string Adicionar(Usuarios usuarios)
+        //{
+
+        //    UsuariosModel um = new UsuariosModel();
+        //    um.Usuarios.Add(usuarios);
+
+        //    return um.Adicionar();
+
+        //}
+
     }
 }
