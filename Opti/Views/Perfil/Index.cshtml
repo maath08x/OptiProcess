@@ -1,8 +1,10 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,15 +30,16 @@
 
 </head>
 
-<body class="bg-dark">
+<body class="bg-dark" onload="pesquisarUser()" >
 
     <div class="container">
 
 
         <div class="card card-register mx-auto mt-5">
-            <div class="card-header"><h3>Crie sua Conta</h3></div>
+            <div class="card-header"><h3>Editar Conta</h3></div>
             <div class="card-body">
                 <form>
+
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-6">
@@ -53,12 +56,14 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <div class="form-label-group">
                             <input type="email" id="email" class="form-control" placeholder="E-mail" required="required">
                             <label>E-mail</label>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-6">
@@ -75,21 +80,72 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" onclick="inserir()" class="btn btn-primary p-2 w-100">Criar Conta</button>
+
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input type="tel" id="fone" class="form-control" placeholder="Telefone" required="required">
+                                    <label>Telefone</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input type="date" id="datanasc" class="form-control" placeholder="Data Nascimento" required="required">
+                                    <label>Data de Nascimento</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input type="text" id="cidade" class="form-control" placeholder="Cidade" required="required">
+                                    <label>Cidade</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input type="text" id="estado" class="form-control" placeholder="estado" required="required">
+                                    <label>Estado</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input type="text" id="endereco" class="form-control" placeholder="Endereço" required="required">
+                                    <label>Endereço</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input type="number" id="numero" class="form-control" placeholder="Numero" required="required">
+                                    <label>Número</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <button type="button" onclick="alterar()" class="btn btn-primary p-2 w-100">Editar</button>
                 </form>
                 <div class="text-center">
-                    <button type="button" onclick="rediLogin()" class="btn btn-link p-2 w-100">Entrar</button>
+                    <button type="button" onclick="redihome()" class="btn btn-link p-2 w-100">Candelar</button>
                 </div>
             </div>
         </div>
 
 
+
     </div>
-
-
-
-
-
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

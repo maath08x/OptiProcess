@@ -9,11 +9,11 @@ namespace Opti.Models
     public class Usuarios
     {
 
-        [Key]
-        public int loginID { get; set; }
+       // [Key]
+       // public int loginID { get; set; }
 
-        [Key]
-        public int pessoaID { get; set; }
+        //[Key]
+        //public int pessoaID { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -30,6 +30,24 @@ namespace Opti.Models
         [Required]
         [StringLength(14)]
         public string senha { get; set; }
+
+        [StringLength(30)]
+        public string rua { get; set; }
+
+        [StringLength(15)]
+        public string numero { get; set; }
+
+        [StringLength(30)]
+        public string cidade { get; set; }
+
+        [StringLength(30)]
+        public string estado { get; set; }
+
+        [StringLength(30)]
+        public string fone { get; set; }
+
+        [StringLength(30)]
+        public DateTime? nascimento { get; set; }
 
         public DateTime? dtCadastro { get; set; }
     }

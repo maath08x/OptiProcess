@@ -19,5 +19,7 @@ namespace Opti.Models
 
         [StringLength(20)]
         public string senha { get; set; }
+
+        public virtual Pessoas Pessoas { get; set; }
     }
 }

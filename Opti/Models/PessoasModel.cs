@@ -101,17 +101,26 @@ namespace Opti.Models
             }
         }
 
-        public List<Pessoas> Adicionar(Pessoas pessoa, Logins login)
+        public string Adicionar(Pessoas pessoa, Logins login)
         {
-            PessoasModel pm = new PessoasModel();
-            pm.Pessoas.Add(pessoa);
-            pm.SaveChanges();
+            
+            try
+            {
+                PessoasModel pm = new PessoasModel();
+                pm.Pessoas.Add(pessoa);
+                pm.SaveChanges();
 
-            login.pessoaID = pessoa.pessoaID;
-            LoginsModel lm = new LoginsModel();
-            lm.Inserir(login);
+                login.pessoaID = pessoa.pessoaID;
+                LoginsModel lm = new LoginsModel();
+                lm.Inserir(login);
+                return "Pessoa cadastrada";
+            }
+            catch (Exception)
+            {
+                return "Não foi possível cadastrar esta pessoa.";
+            }
 
-            return pm.Pessoas.Where(e => e.pessoaID == pessoa.pessoaID).ToList();
+          
         }
 
         public string Alterar(Pessoas pessoas)

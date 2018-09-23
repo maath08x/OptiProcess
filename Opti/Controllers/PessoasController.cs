@@ -11,6 +11,7 @@ namespace Opti.Controllers
     {
         private static Pessoas pessoas = new Pessoas();
         private static PessoasModel pessoasModel = new PessoasModel();
+        private static Logins logins = new Logins();
         // GET: Pessoas
         public ActionResult Index()
         {
@@ -94,6 +95,29 @@ namespace Opti.Controllers
 
             return pessoasModel.Adicionar(pessoas);
         }
+
+        [HttpPost]
+        public string AdicionarLogins()
+        {
+            pessoas.cidade = Request.Params["Cidade"];
+            pessoas.documento = Convert.ToInt32(Request.Params["Documento"]);
+            pessoas.dtCadastro = DateTime.Now;
+            pessoas.email = Request.Params["Email"];
+            pessoas.estado = Request.Params["Estado"];
+            pessoas.fantasia = Request.Params["Fantasia"];
+            pessoas.nascimento = Convert.ToDateTime(Request.Params["Nascimento"]);
+            pessoas.nome = Request.Params["Nome"];
+            pessoas.numero = Request.Params["Numero"];
+            pessoas.rua = Request.Params["Rua"];
+            pessoas.telefone = Request.Params["Telefone"];
+            pessoas.tipoPessoa = Convert.ToInt32(Request.Params["Tipo"]);
+
+            logins.login = Request.Params["Usuario"];
+            logins.senha = Request.Params["Senha"];
+
+            return pessoasModel.Adicionar(pessoas, logins);
+        }
+
 
         [HttpPost]
         public string Alterar()

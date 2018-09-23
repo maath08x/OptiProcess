@@ -21,17 +21,28 @@ function validaAcesso() {
 
     var usuario = window.localStorage.getItem("usuario");
 
-    if (usuario != null) {
+    if (usuario == null) {
 
         toastr.info("", "Sua Sessão Expirou !")  
-
-    } else {
-        
         var urlsair = "http://" + location.host + "/Login";
 
         window.location.href = (urlsair);
 
-        toastr.success("", "Bem Vindo " + usuario)
+    } else {
+
+        pesquisarUser();
+      
     }
+
+}
+
+function redihome() {
+
+    
+        var urlsair = "http://" + location.host;
+
+        window.location.href = (urlsair);
+
+          
 
 }

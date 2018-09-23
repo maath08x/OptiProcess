@@ -10,15 +10,37 @@ namespace Opti.Models
 
     public class UsuariosModel : DbContext
     {
-        //public string Adicionar(Usuarios usuarios)
-        //{
 
-        //    UsuariosModel um = new UsuariosModel();
-        //    um.Usuarios.Add(usuarios);
 
-        //    return um.Adicionar();
 
-        //}
+        public string Alterar(Usuarios usuarios)
+        {
+            //UsuarioModel pm = new UsuarioModel();
+            //Usuario usuario = pm.Pessoas.Single(c => c.pessoaID.Equals(usuarios.pessoaID));
+
+            //usuario.cidade = usuarios.cidade;
+            //usuario.documento = usuarios.documento;
+            //usuario.dtCadastro = usuarios.dtCadastro;
+            //usuario.email = usuarios.email;
+            //usuario.estado = usuarios.estado;
+            //usuario.fantasia = usuarios.fantasia;
+            //usuario.nascimento = usuarios.nascimento;
+            //usuario.nome = usuarios.nome;
+            //usuario.numero = usuarios.numero;
+            //usuario.rua = usuarios.rua;
+            //usuario.telefone = usuarios.telefone;
+
+            try
+            {
+                //pm.SaveChanges();
+
+                return "Item alterado.";
+            }
+            catch (Exception)
+            {
+                return "Não foi possível alterar.";
+            }
+        }
 
     }
 }

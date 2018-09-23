@@ -26,6 +26,33 @@ namespace Opti.Models
                 .IsUnicode(false);
         }
 
+
+        public List<Logins> Pesquisar(string logins, int loginId)
+        {
+            LoginsModel pm = new LoginsModel();
+            IEnumerable<Logins> login;
+
+            if (loginId != 0 && logins != null)
+            {
+                login = from p in pm.Logins where p.loginID == loginId select p;
+            }
+            else if (loginId != 0)
+            {
+                login = from p in pm.Logins where p.loginID == loginId select p;
+            }
+            else if (logins != "")
+            {
+                login = from p in pm.Logins where p.login.Contains(logins) select p;
+            }
+            else
+            {
+                login = from p in pm.Logins select p;
+            }
+
+            return login.ToList();
+        }
+
+
         public void Inserir(Logins login)
         {
             LoginsModel lm = new LoginsModel();
@@ -36,17 +63,17 @@ namespace Opti.Models
         public void Alterar(Logins logins)
         {
             LoginsModel lm = new LoginsModel();
-            Logins login = lm.Logins.Single(c => c.pessoaID.Equals(logins.pessoaID));
+            Logins login = lm.Logins.Single(c => c.loginID.Equals(logins.loginID));
 
             login.login = logins.login;
 
             lm.SaveChanges();
         }
 
-        public void Deletar(int pessoaID)
+        public void Deletar(int loginID)
         {
             LoginsModel lm = new LoginsModel();
-            Logins login = lm.Logins.Single(c => c.pessoaID.Equals(pessoaID));
+            Logins login = lm.Logins.Single(c => c.loginID.Equals(loginID));
             lm.Logins.Remove(login);
             lm.SaveChanges();
         }
