@@ -33,5 +33,14 @@ namespace Opti.Controllers
             //return loginsModel.Autenticar(logins.login ,logins.senha);
             return true;
         }
+
+        [HttpGet]
+        public JsonResult Pesquisar()
+        {
+            logins.login = Request.Params["Usuario"];
+            List<Logins> lp = loginsModel.Pesquisar(logins.login,0);
+
+            return Json(lp, JsonRequestBehavior.AllowGet);
+        }
     }
 }

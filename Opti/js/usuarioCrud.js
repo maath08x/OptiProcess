@@ -89,7 +89,7 @@ function pesquisarUser() {
             var senha = response[0]["senha"];
             var confsenha = response[0]["Nome"];
             var endereco = response[0]["Pessoas"]["rua"];
-            var numero = response[0]["Pessoas"]["nunero"];
+            var numero = response[0]["Pessoas"]["numero"];
             var cidade = response[0]["Pessoas"]["cidade"];
             var estado = response[0]["Pessoas"]["estado"];
             var fone = response[0]["Pessoas"]["telefone"];
@@ -105,15 +105,12 @@ function pesquisarUser() {
             document.getElementById('cidade').value = cidade;
             document.getElementById('estado').value = estado;
             document.getElementById('fone').value = fone;
-            document.getElementById('datanasc').value = datanasc;          
-
-
-
+            document.getElementById('datanasc').value = datanasc;
         }
     }
 
 
-        var sURL = "http://" + location.host + "/Logins/Pesquisar?" + sRequest;
+        var sURL = "http://" + location.host + "/Login/Pesquisar?" + sRequest;
 
         xhttp.open("GET", sURL, true);
         xhttp.send();
