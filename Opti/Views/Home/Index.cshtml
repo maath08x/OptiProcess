@@ -2,30 +2,46 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="@Url.Action("Index","Maquinarios")" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<br />
+    <h2>Dashboard</h2>
+    <br />
 
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-chart-area"></i>
+        Produtividade Quizenal
+    </div>
+    <div class="card-body">
+        <canvas id="myAreaChart" width="100%" height="30"></canvas>
+    </div>
+    <div class="card-footer small text-muted">Atualizado </div>
+</div>
 <div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <div class="col-lg-8">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-chart-bar"></i>
+                Produtividade Mensal
+            </div>
+            <div class="card-body">
+                <canvas id="myBarChart" width="100%" height="50"></canvas>
+            </div>
+            <div class="card-footer small text-muted">Atualizado </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="col-lg-4">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-chart-pie"></i>
+                Quantidade por Produto
+            </div>
+            <div class="card-body">
+                <canvas id="myPieChart" width="100%" height="100"></canvas>
+            </div>
+            <div class="card-footer small text-muted">Atualizado</div>
+        </div>
     </div>
 </div>
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-bar-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
