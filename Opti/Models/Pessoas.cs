@@ -16,8 +16,7 @@ namespace Opti.Models
         [Required]
         [StringLength(50)]
         public string nome { get; set; }
-
-        [Required]
+        
         [StringLength(20)]
         public string fantasia { get; set; }
 

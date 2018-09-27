@@ -1,4 +1,7 @@
-﻿
+﻿var glb_nPessoaID;
+var glb_nTipo;
+
+
 function alterar() {
 
     var nome = document.getElementById("nome").value;
@@ -13,10 +16,8 @@ function alterar() {
     var fone = document.getElementById("fone").value;
     var datanasc = document.getElementById("datanasc").value;
 
-    var sRequest = "Nome=" + escape(nome.value) + "&Email=" + escape(email.value) + "&Usuario=" + escape(usuario.value) +
-        "&Senha=" + escape(senha.value) + + "&Rua=" + escape(endereco.value) + "&Numero=" + escape(numero.value) +
-        "&Cidade=" + escape(cidade.value) + "&Estado=" + escape(estado.value) + "&Telefone=" + escape(fone.value)+
-        "&Nascimento=" + escape(datanasc.value);
+    var sRequest = "ID=" + glb_nPessoaID + "&Tipo=" + glb_nTipo + "&Nome=" + nome + "&Email=" + email + "&Usuario=" + usuario + "&Senha=" + senha + "&Rua=" + endereco +
+        "&Numero=" + numero + "&Cidade=" + cidade + "&Estado=" + estado + "&Telefone=" + fone + "&Nascimento=" + datanasc;
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -25,7 +26,7 @@ function alterar() {
         }
     }
 
-    var sURL = "http://" + location.host + "/Usuarios/Alterar?" + sRequest;
+    var sURL = "http://" + location.host + "/Pessoas/Alterar?" + sRequest;
 
     xhttp.open("POST", sURL, true);
     xhttp.send();
@@ -73,7 +74,7 @@ function pesquisarUser() {
     var usuario = window.localStorage.getItem("usuario");    
     
 
-       var sRequest = "Usuario=" + usuario;
+    var sRequest = "Usuario=" + usuario;
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -82,7 +83,8 @@ function pesquisarUser() {
             var response = JSON.parse(xhttp.response);
             var sInner = "";
 
-
+            glb_nPessoaID = response[0]["Pessoas"]["pessoaID"];
+            glb_nTipo = response[0]["Pessoas"]["tipoPessoa"];
             var nome = response[0]["Pessoas"]["nome"];
             var email = response[0]["Pessoas"]["email"];
             var usuario = response[0]["login"];

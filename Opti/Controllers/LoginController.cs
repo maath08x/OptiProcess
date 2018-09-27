@@ -24,21 +24,21 @@ namespace Opti.Controllers
         public bool Autenticar()
         {
            
-           //logins.login = Request.Params["Usuario"];
-           //logins.senha = Request.Params["Senha"];
+           logins.login = Request.Params["Usuario"];
+           logins.senha = Request.Params["Senha"];
 
             logins.login =(Request.Params["usuario"] == "" ? "0" : Request.Params["usuario"]);
             logins.senha = (Request.Params["senha"] == "" ? "0" : Request.Params["senha"]);
 
-            //return loginsModel.Autenticar(logins.login ,logins.senha);
-            return true;
+            return logins.Autenticar(logins.login ,logins.senha);
+            //return true;
         }
 
         [HttpGet]
         public JsonResult Pesquisar()
         {
             logins.login = Request.Params["Usuario"];
-            List<Logins> lp = loginsModel.Pesquisar(logins.login,0);
+            List<Logins> lp = logins.Pesquisar(logins.login,0);
 
             return Json(lp, JsonRequestBehavior.AllowGet);
         }
