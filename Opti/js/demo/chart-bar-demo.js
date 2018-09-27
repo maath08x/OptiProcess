@@ -5,14 +5,14 @@ dayName = new Array("Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", 
 monName = new Array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Agosto", "Outubro", "Novembro", "Dezembro")
 
 var hoje = new Date()
-var mes = hoje.getMonth()
+var mes_ = hoje.getMonth()
 
 // Bar Chart Example
 var ctx = document.getElementById("myBarChart");
 var myLineChart = new Chart(ctx, {
   type: 'bar',
   data: {
-      labels: [monName[mes-5], monName[mes-4], monName[mes-3], monName[mes-2], monName[mes-1], monName[mes]],
+      labels: [monName[mes_-6], monName[mes_-5], monName[mes_-4], monName[mes_-3], monName[mes_-2], monName[mes_-1]],
     datasets: [{
       label: "Revenue",
       backgroundColor: "rgba(2,117,216,1)",
