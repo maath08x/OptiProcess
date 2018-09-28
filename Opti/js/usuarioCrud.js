@@ -107,7 +107,9 @@ function pesquisarUser() {
             document.getElementById('cidade').value = cidade;
             document.getElementById('estado').value = estado;
             document.getElementById('fone').value = fone;
-            document.getElementById('datanasc').value = datanasc;
+            var dt = new Date(parseInt(datanasc.replace('/Date(', '')));
+            var dt1 = dt.getDate() + "/" + dt.getMonth() + "/" + dt.getFullYear();
+            document.getElementById('datanasc').value = dt1;
         }
     }
 
