@@ -10,7 +10,6 @@ namespace Opti.Controllers
     public class PessoasController : Controller
     {
         private static Pessoas pessoas = new Pessoas();
-        private static PessoasModel pessoasModel = new PessoasModel();
         private static Logins logins = new Logins();
         // GET: Pessoas
         public ActionResult Index()
@@ -71,7 +70,7 @@ namespace Opti.Controllers
             pessoas.pessoaID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
             pessoas.nome = Request.Params["Nome"];
             pessoas.tipoPessoa = Convert.ToInt32((Request.Params["Tipo"] == "" ? "0" : Request.Params["Tipo"]));
-            List<Pessoas> lp = pessoasModel.Pesquisar(pessoas.pessoaID, pessoas.nome, pessoas.tipoPessoa);
+            List<Pessoas> lp = pessoas.Pesquisar(pessoas.pessoaID, pessoas.nome, pessoas.tipoPessoa);
 
             return Json(lp, JsonRequestBehavior.AllowGet);
         }
@@ -93,7 +92,7 @@ namespace Opti.Controllers
             pessoas.tipoPessoa = Convert.ToInt32(Request.Params["Tipo"]);
             
 
-            return pessoasModel.Adicionar(pessoas);
+            return pessoas.Adicionar(pessoas);
         }
 
         [HttpPost]
@@ -115,7 +114,7 @@ namespace Opti.Controllers
             logins.login = Request.Params["Usuario"];
             logins.senha = Request.Params["Senha"];
 
-            return pessoasModel.Adicionar(pessoas, logins);
+            return pessoas.Adicionar(pessoas, logins);
         }
 
 
@@ -137,14 +136,14 @@ namespace Opti.Controllers
             pessoas.tipoPessoa = Convert.ToInt32(Request.Params["Tipo"]);
 
 
-            return pessoasModel.Alterar(pessoas);
+            return pessoas.Alterar(pessoas);
         }
 
         [HttpPost]
         public string Deletar()
         {
             pessoas.pessoaID = Convert.ToInt32(Request.Params["ID"]);
-            return pessoasModel.Deletar(pessoas.pessoaID,0);
+            return pessoas.Deletar(pessoas.pessoaID,0);
         }
 
 

@@ -48,7 +48,7 @@ namespace Opti.Controllers
             pedidos.pedidoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
             pedidos.pessoaID = Convert.ToInt32((Request.Params["PessoaID"] == "" ? "0" : Request.Params["PessoaID"]));
             pedidos.tipoPedido = Convert.ToInt32((Request.Params["Tipo"] == "" ? "0" : Request.Params["Tipo"]));
-            List<Pedidos> lp = pedidosModel.Pesquisar(pedidos.pedidoID, pedidos.pessoaID);
+            List<Pedidos> lp = pedidos.Pesquisar(pedidos.pedidoID, pedidos.pessoaID);
 
             string txt = JsonConvert.SerializeObject(lp);
 
@@ -60,7 +60,7 @@ namespace Opti.Controllers
         {
             int pedidoID = Convert.ToInt32((Request.Params["PedidoID"] == "" ? "0" : Request.Params["PedidoID"]));
             int pedidoProdutoID = Convert.ToInt32((Request.Params["PedidoProdutoID"] == "" ? "0" : Request.Params["PedidoProdutoID"]));
-            List<PedidosProdutos> lpp = pedidosModel.PesquisarPedidosProdutos(pedidoID, pedidoProdutoID);
+            List<PedidosProdutos> lpp = pedidosProdutos.Pesquisar(pedidoID, pedidoProdutoID);
 
             string txt = JsonConvert.SerializeObject(lpp);
 
@@ -73,7 +73,7 @@ namespace Opti.Controllers
             pedidos.pedidoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
             pedidos.pessoaID = Convert.ToInt32((Request.Params["PessoaID"] == "" ? "0" : Request.Params["PessoaID"]));
 
-            return pedidosModel.Alterar(pedidos);
+            return pedidos.Alterar(pedidos);
         }
 
         [HttpPost]
@@ -82,7 +82,7 @@ namespace Opti.Controllers
             pedidosProdutos.pedProdutosID = Convert.ToInt32((Request.Params["PedidoProdutoID"] == "" ? "0" : Request.Params["PedidoProdutoID"]));
             pedidosProdutos.qntPedido = Convert.ToInt32((Request.Params["QntPedido"] == "" ? "0" : Request.Params["QntPedido"]));
 
-            return pedidosModel.AlterarProd(pedidosProdutos);
+            return pedidosProdutos.Alterar(pedidosProdutos);
         }
 
         [HttpPost]
@@ -95,7 +95,7 @@ namespace Opti.Controllers
             List<PedidosProdutos> lpp = new List<PedidosProdutos>();
             lpp.Add(pedidosProdutos);
 
-            return pedidosModel.Adicionar(pedidos, lpp);
+            return pedidos.Adicionar(pedidos, lpp);
         }
 
         [HttpPost]
@@ -103,7 +103,7 @@ namespace Opti.Controllers
         {
             pedidosProdutos.pedProdutosID = Convert.ToInt32((Request.Params["PedProdutoID"] == "" ? "0" : Request.Params["PedProdutoID"]));
 
-            return pedidosModel.DeletarProd(pedidosProdutos.pedProdutosID);
+            return pedidosProdutos.Deletar(pedidosProdutos.pedProdutosID);
         }
 
         [HttpPost]
@@ -111,7 +111,7 @@ namespace Opti.Controllers
         {
             int PedidoID = Convert.ToInt32((Request.Params["PedidoID"] == "" ? "0" : Request.Params["PedidoID"]));
 
-            return pedidosModel.Deletar(PedidoID);
+            return pedidos.Deletar(PedidoID);
         }
 
         [HttpPost]
@@ -121,7 +121,7 @@ namespace Opti.Controllers
             pedidos.tipoPedido = Convert.ToInt32((Request.Params["Tipo"] == "" ? "0" : Request.Params["Tipo"]));
             List<PedidosProdutos> lpp = new List<PedidosProdutos>();
 
-            return pedidosModel.Adicionar(pedidos, lpp);
+            return pedidos.Adicionar(pedidos, lpp);
         }
 
         [HttpPost]
@@ -129,7 +129,7 @@ namespace Opti.Controllers
         {
             pedidos.pedidoID = Convert.ToInt32((Request.Params["PedidoID"] == "" ? "0" : Request.Params["PedidoID"]));
 
-            return pedidosModel.VerificaFinaliza(pedidos.pedidoID);
+            return pedidos.VerificaFinaliza(pedidos.pedidoID);
         }
     }
 }

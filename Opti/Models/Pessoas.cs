@@ -44,5 +44,49 @@ namespace Opti.Models
         public int? documento { get; set; }
 
         public DateTime? dtCadastro { get; set; }
+
+        #region "Métodos CRUD"
+        public List<Pessoas> Pesquisar(int pessoaID, string nome, int tipoPessoa)
+        {
+            PessoasModel pm = new PessoasModel();
+            return pm.Pesquisar(pessoaID, nome, tipoPessoa);
+        }
+
+        public List<Pessoas> Pesquisar()
+        {
+            PessoasModel pm = new PessoasModel();
+            return pm.Pesquisar();
+        }
+
+        public string Adicionar(Pessoas pessoas, Logins logins)
+        {
+            PessoasModel pm = new PessoasModel();
+            return pm.Adicionar(pessoas, logins);
+        }
+
+        public string Adicionar(Pessoas pessoas)
+        {
+            PessoasModel pm = new PessoasModel();
+            return pm.Adicionar(pessoas);
+        }
+
+        public string Alterar(Pessoas pessoas)
+        {
+            PessoasModel pm = new PessoasModel();
+            return pm.Alterar(pessoas);
+        }
+
+        public List<Pessoas> Alterar(Pessoas pessoas, Logins logins)
+        {
+            PessoasModel pm = new PessoasModel();
+            return pm.Alterar(pessoas, logins);
+        }
+
+        public string Deletar(int pessoaID, int tipoPessoa)
+        {
+            PessoasModel pm = new PessoasModel();
+            return pm.Deletar(pessoaID, tipoPessoa);
+        }
+        #endregion
     }
 }

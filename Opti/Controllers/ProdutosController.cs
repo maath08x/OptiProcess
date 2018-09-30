@@ -13,7 +13,6 @@ namespace Opti.Controllers
         private static Produtos produtos = new Produtos();
         private static ProdutosFilhos produtosFilhos = new ProdutosFilhos();
         private static ProdutosMaquinarios produtosMaquinarios = new ProdutosMaquinarios();
-        private static ProdutosModel produtosModel = new ProdutosModel();
         // GET: Produtos
         public ActionResult Index()
         {
@@ -49,7 +48,7 @@ namespace Opti.Controllers
             produtos.descricao = Request.Params["Descricao"];
             produtos.leadTime = Convert.ToInt32((Request.Params["LeadTime"] == "" ? "0" : Request.Params["LeadTime"]));
             produtos.nome = Request.Params["Nome"];
-            return produtosModel.Adicionar(produtos);
+            return produtos.Adicionar(produtos);
         }
 
         [HttpPost]
@@ -58,7 +57,7 @@ namespace Opti.Controllers
             produtosFilhos.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
             produtosFilhos.filhoID = Convert.ToInt32((Request.Params["SubProdutoID"] == "" ? "0" : Request.Params["SubProdutoID"]));
             produtosFilhos.quantidade = Convert.ToInt32((Request.Params["Quantidade"] == "" ? "0" : Request.Params["Quantidade"]));
-            return produtosModel.Adicionar(produtosFilhos);
+            return produtosFilhos.Adicionar(produtosFilhos);
         }
 
         [HttpPost]
@@ -66,7 +65,7 @@ namespace Opti.Controllers
         {
             produtosMaquinarios.tipoMaquinario = Convert.ToInt32((Request.Params["TipoMaqProdutoID"] == "" ? "0" : Request.Params["TipoMaqProdutoID"]));
             produtosMaquinarios.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
-            return produtosModel.Adicionar(produtosMaquinarios);
+            return produtosMaquinarios.Adicionar(produtosMaquinarios);
         }
 
         [HttpGet]
@@ -74,7 +73,7 @@ namespace Opti.Controllers
         {
             produtos.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
             produtos.nome = Request.Params["Nome"];
-            List<Produtos> lp = produtosModel.Pesquisar(produtos.produtoID, produtos.nome);
+            List<Produtos> lp = produtos.Pesquisar(produtos.produtoID, produtos.nome);
 
             string txt = JsonConvert.SerializeObject(lp);
 
@@ -86,7 +85,7 @@ namespace Opti.Controllers
         {
             produtosFilhos.produtosFilhosID = Convert.ToInt32((Request.Params["ProdutoID"] == "" ? "0" : Request.Params["ProdutoID"]));
             produtosFilhos.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
-            List<ProdutosFilhos> lpf = produtosModel.PesquisarFilho(produtosFilhos.produtoID, produtosFilhos.produtosFilhosID);
+            List<ProdutosFilhos> lpf = produtosFilhos.Pesquisar(produtosFilhos.produtoID, produtosFilhos.produtosFilhosID);
 
             string txt = JsonConvert.SerializeObject(lpf);
 
@@ -97,7 +96,7 @@ namespace Opti.Controllers
         public string PesquisarProdutosMaquinarios()
         {
             produtos.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
-            List<ProdutosMaquinarios> lpf = produtosModel.PesquisarPM(produtos.produtoID);
+            List<ProdutosMaquinarios> lpf = produtosMaquinarios.Pesquisar(produtos.produtoID);
 
             string txt = JsonConvert.SerializeObject(lpf);
 
@@ -110,7 +109,7 @@ namespace Opti.Controllers
             produtos.descricao = Request.Params["Descricao"];
             produtos.leadTime = Convert.ToInt32((Request.Params["LeadTime"] == "" ? "0" : Request.Params["LeadTime"]));
             produtos.nome = Request.Params["Nome"];
-            return produtosModel.Alterar(produtos);
+            return produtos.Alterar(produtos);
         }
 
         [HttpPost]
@@ -119,7 +118,7 @@ namespace Opti.Controllers
             produtosFilhos.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
             produtosFilhos.filhoID = Convert.ToInt32((Request.Params["SubProdutoID"] == "" ? "0" : Request.Params["SubProdutoID"]));
             produtosFilhos.quantidade = Convert.ToInt32((Request.Params["Quantidade"] == "" ? "0" : Request.Params["Quantidade"]));
-            return produtosModel.Alterar(produtosFilhos);
+            return produtosFilhos.Alterar(produtosFilhos);
         }
 
 
@@ -127,21 +126,21 @@ namespace Opti.Controllers
         public string Deletar()
         {
             produtos.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
-            return produtosModel.Deletar(produtos.produtoID);
+            return produtos.Deletar(produtos.produtoID);
         }
 
         [HttpPost]
         public string DeletarSubProdutos()
         {
             produtosFilhos.produtosFilhosID = Convert.ToInt32((Request.Params["SubProdutoID"] == "" ? "0" : Request.Params["SubProdutoID"]));
-            return produtosModel.DeletarFilho(produtosFilhos.produtosFilhosID);
+            return produtosFilhos.Deletar(produtosFilhos.produtosFilhosID);
         }
 
         [HttpPost]
         public string DeletarMaqProdutos()
         {
             produtosMaquinarios.produtosMaquinariosID = Convert.ToInt32((Request.Params["MaqProdutoID"] == "" ? "0" : Request.Params["MaqProdutoID"]));
-            return produtosModel.DeletarProdutoMaquinario(produtosMaquinarios.produtosMaquinariosID);
+            return produtosMaquinarios.Deletar(produtosMaquinarios.produtosMaquinariosID);
         }
         
     }

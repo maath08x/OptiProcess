@@ -41,7 +41,7 @@ namespace Opti.Controllers
             int opID = Convert.ToInt32((Request.Params["OPID"] == "" ? "0" : Request.Params["OPID"]));
             int produtoID = Convert.ToInt32((Request.Params["ProdutoID"] == "" ? "0" : Request.Params["ProdutoID"]));
             int pedidoID = Convert.ToInt32((Request.Params["PedidoID"] == "" ? "0" : Request.Params["PedidoID"]));
-            List<OrdemProducao> lop = ordemProducaoModel.Pesquisar(opID, produtoID, pedidoID);
+            List<OrdemProducao> lop = ordemProducao.Pesquisar(opID, produtoID, pedidoID);
 
             return Json(lop, JsonRequestBehavior.AllowGet);
         }
@@ -55,14 +55,14 @@ namespace Opti.Controllers
             ordemProducao.pedidoID = Convert.ToInt32(Request.Params["pedidoID"]);
             ordemProducao.produtoID = Convert.ToInt32(Request.Params["produtoID"]);
             ordemProducao.quantidade = Convert.ToInt32(Request.Params["quantidade"]);
-            return ordemProducaoModel.Adicionar(ordemProducao);
+            return ordemProducao.Adicionar(ordemProducao);
         }
 
         [HttpPost]
         public string Concluir()
         {
             ordemProducao.ordemProducaoID = Convert.ToInt32((Request.Params["OPID"] == "" ? "0" : Request.Params["OPID"]));
-            return ordemProducaoModel.Concluir(ordemProducao);
+            return ordemProducao.Concluir(ordemProducao);
         }
     }
 }

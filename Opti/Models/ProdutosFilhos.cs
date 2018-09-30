@@ -21,5 +21,31 @@ namespace Opti.Models
         public virtual Produtos Produtos { get; set; }
 
         public virtual Produtos Produtos1 { get; set; }
+
+        #region "Métodos CRUD"
+        public List<ProdutosFilhos> Pesquisar(int produtoID,int produtoFilhoID)
+        {
+            ProdutosModel pm = new ProdutosModel();
+            return pm.PesquisarFilho(produtoID, produtoFilhoID);
+        }
+
+        public string Adicionar(ProdutosFilhos pf)
+        {
+            ProdutosModel pm = new ProdutosModel();
+            return pm.Adicionar(pf);
+        }
+
+        public string Alterar(ProdutosFilhos pf)
+        {
+            ProdutosModel pm = new ProdutosModel();
+            return pm.Alterar(pf);
+        }
+
+        public string Deletar(int produtoFilhoID)
+        {
+            ProdutosModel pm = new ProdutosModel();
+            return pm.DeletarFilho(produtoFilhoID);
+        }
+        #endregion
     }
 }

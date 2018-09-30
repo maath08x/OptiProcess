@@ -15,5 +15,25 @@ namespace Opti.Models
         public int tipoMaquinario { get; set; }
 
         public virtual Produtos Produtos { get; set; }
+
+        #region "Métodos CRUD"
+        public List<ProdutosMaquinarios> Pesquisar(int produtoID)
+        {
+            ProdutosModel pm = new ProdutosModel();
+            return pm.PesquisarPM(produtoID);
+        }
+
+        public string Adicionar(ProdutosMaquinarios pf)
+        {
+            ProdutosModel pm = new ProdutosModel();
+            return pm.Adicionar(pf);
+        }
+
+        public string Deletar(int produtoMaquinarioID)
+        {
+            ProdutosModel pm = new ProdutosModel();
+            return pm.DeletarProdutoMaquinario(produtoMaquinarioID);
+        }
+        #endregion
     }
 }

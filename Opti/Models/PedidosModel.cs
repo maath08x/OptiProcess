@@ -24,9 +24,6 @@ namespace Opti.Models
                 .WillCascadeOnDelete(false);
         }
 
-        public int leadTime = 0;
-        ProdutosModel p = new ProdutosModel();
-
         public List<Pedidos> Pesquisar(int pedidoID, int pessoaID)
         {
             PedidosModel pm = new PedidosModel();
@@ -165,56 +162,5 @@ namespace Opti.Models
                 return "Não foi possível deletar.";
             }
         }
-
-        #region "Métodos para verificações"
-
-        public string Verifica(List<PedidosProdutos> lpp)
-        {
-            string situacaoPedido = "";
-            if (lpp[0].produtoID == 0)
-            {
-                return "Por favor, digite um id válido.";
-            }
-
-            for (int i = 0; i < lpp.Count; i++)
-            {
-                situacaoPedido += p.VerificaQuntidade(lpp[i].produtoID, lpp[i].qntPedido);
-            }
-            return situacaoPedido;
-        }
-
-        public string VerificaFinaliza(int pedidoID)
-        {
-            PedidosModel pm = new PedidosModel();
-            List<Pedidos> lp = pm.Pesquisar(pedidoID, 0);
-            List<PedidosProdutos> lpp = pm.PesquisarPedidosProdutos(pedidoID,0);
-
-            string retorno = Verifica(lpp);
-
-            if (p.pedidoOk)
-            {
-                DateTime dtPrevisao = DateTime.Now;
-                dtPrevisao = dtPrevisao.AddDays(leadTime);
-
-                lp[0].dtPrevisao = DateTime.Now;
-                lp[0].dtPrevisao = dtPrevisao;
-                lp[0].finalizado = true;
-                Alterar(lp[0]);
-
-                OrdemProducaoModel op = new OrdemProducaoModel();
-                List<OrdemProducao> lop = op.Pesquisar(0, 0, lp[0].pedidoID);
-                if (lop.Count > 0)
-                {
-                    lop[0].dtConclusao = DateTime.Today;
-                    op.Concluir(lop[0]);
-                }
-                return "Pedido finalizado";
-            }
-            else
-            {
-                return retorno;
-            }
-        }
-        #endregion
     }
 }

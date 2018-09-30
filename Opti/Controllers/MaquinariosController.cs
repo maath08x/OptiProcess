@@ -54,7 +54,7 @@ namespace Opti.Controllers
             maquinarios.nome = Request.Params["Nome"];
             maquinarios.tipoMaquinario = Convert.ToInt32((Request.Params["Tipo"] == "" ? "0" : Request.Params["Tipo"]));
             maquinarios.statusMaquinario = Convert.ToInt32((Request.Params["Status"] == "" ? "0" : Request.Params["Status"]));
-            return maquinariosModel.Adicionar(maquinarios);
+            return maquinarios.Adicionar(maquinarios);
         }
 
         [HttpGet]
@@ -63,7 +63,7 @@ namespace Opti.Controllers
             maquinarios.maquinarioID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
             maquinarios.nome = Request.Params["Nome"];
             maquinarios.tipoMaquinario = Convert.ToInt32((Request.Params["Tipo"] == "" ? "0" : Request.Params["Tipo"]));
-            List<Maquinarios> lm = maquinariosModel.Pesquisar(maquinarios.maquinarioID, maquinarios.nome, 0);
+            List<Maquinarios> lm = maquinarios.Pesquisar(maquinarios.maquinarioID, maquinarios.nome, 0);
             
             return Json(lm, JsonRequestBehavior.AllowGet);
         }
@@ -74,14 +74,14 @@ namespace Opti.Controllers
             maquinarios.descricao = Request.Params["Descricao"];
             maquinarios.nome = Request.Params["Nome"];
             maquinarios.tipoMaquinario = Convert.ToInt32((Request.Params["Tipo"] == "" ? "0" : Request.Params["Tipo"]));
-            return maquinariosModel.Alterar(maquinarios);
+            return maquinarios.Alterar(maquinarios);
         }
 
         [HttpPost]
         public string Deletar()
         {
             maquinarios.maquinarioID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
-            return maquinariosModel.Deletar(maquinarios.maquinarioID);
+            return maquinarios.Deletar(maquinarios.maquinarioID);
         }
     }
 }
