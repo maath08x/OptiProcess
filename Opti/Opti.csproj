@@ -176,7 +176,6 @@
     <Compile Include="Models\MaquinariosModel.cs" />
     <Compile Include="Models\OrdemProducao.cs" />
     <Compile Include="Models\OrdemProducaoModel.cs" />
-    <Compile Include="Models\OrdemProducaoProcessos.cs" />
     <Compile Include="Models\Pedidos.cs" />
     <Compile Include="Models\PedidosModel.cs" />
     <Compile Include="Models\PedidosProdutos.cs" />

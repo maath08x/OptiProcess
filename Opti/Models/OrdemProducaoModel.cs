@@ -5,6 +5,7 @@ namespace Opti.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Data.Entity.Core;
 
     public partial class OrdemProducaoModel : DbContext
     {
@@ -13,7 +14,6 @@ namespace Opti.Models
         {
         }
 
-        public virtual DbSet<OrdemProducaoProcessos> OrdemProducaoProcessos { get; set; }
         public virtual DbSet<OrdemProducao> OrdemProducao { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -46,16 +46,6 @@ namespace Opti.Models
             return op.ToList();
         }
 
-        public List<OrdemProducaoProcessos> Pesquisar(int id)
-        {
-            OrdemProducaoModel opm = new OrdemProducaoModel();
-            IEnumerable<OrdemProducaoProcessos> opp;
-
-            opp = from o in opm.OrdemProducaoProcessos where o.ordemProducaoProcID == id select o;
-
-            return opp.ToList();
-        }
-
         public string Adicionar(OrdemProducao op)
         {
             OrdemProducaoModel opm = new OrdemProducaoModel();
@@ -83,14 +73,15 @@ namespace Opti.Models
 
             try
             {
+                opm.Entry(op).State = EntityState.Modified;
                 opm.SaveChanges();
-                MaquinariosModel m = new MaquinariosModel();
+                Maquinarios m = new Maquinarios();
                 m.ConcluirOP(op.maquinarioID, op.dtPrevisao);
                 return "OP concluída.";
             }
             catch (Exception e)
             {
-                return "Não foi possível concluir esta OP.";
+                return "OP não concluída.";
             }
         }
         #endregion

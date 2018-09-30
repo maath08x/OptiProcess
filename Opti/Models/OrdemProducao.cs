@@ -40,5 +40,27 @@ namespace Opti.Models
         public DateTime? dtPrevisao { get; set; }
 
         public DateTime? dtConclusao { get; set; }
+
+        #region "Métodos CRUD"
+
+        public List<OrdemProducao> Pesquisar(int opID, int produtoID, int pedidoID)
+        {
+            OrdemProducaoModel opm = new OrdemProducaoModel();
+            return opm.Pesquisar(opID, produtoID, pedidoID);
+        }
+
+        public string Adicionar(OrdemProducao op)
+        {
+            OrdemProducaoModel opm = new OrdemProducaoModel();
+            return opm.Adicionar(op);
+        }
+
+        public string Concluir(OrdemProducao op)
+        {
+            OrdemProducaoModel opm = new OrdemProducaoModel();
+            return opm.Concluir(op);
+        }
+
+        #endregion
     }
 }
