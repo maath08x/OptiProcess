@@ -170,6 +170,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Dashboard.cs" />
+    <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\Logins.cs" />
     <Compile Include="Models\LoginsModel.cs" />
     <Compile Include="Models\Maquinarios.cs" />
@@ -203,6 +205,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="js\Dashboard.js" />
     <Content Include="js\demo\chart-area-demo.js" />
     <Content Include="js\demo\chart-bar-demo.js" />
     <Content Include="js\demo\chart-pie-demo.js" />
