@@ -73,7 +73,6 @@ namespace Opti.Models
 
             try
             {
-                opm.Entry(op).State = EntityState.Modified;
                 opm.SaveChanges();
                 Maquinarios m = new Maquinarios();
                 m.ConcluirOP(op.maquinarioID, op.dtPrevisao);
