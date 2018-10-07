@@ -31,13 +31,13 @@ namespace Opti.Models
         [Column(TypeName = "date")]
         public DateTime? dtPrevisao { get; set; }
 
-
+        /*
         public List<Dashboard> Pesquisar()
         {
             DashboardModel pm = new DashboardModel();
             return pm.Pesquisar();
         }
-
+        */
     }
 
 

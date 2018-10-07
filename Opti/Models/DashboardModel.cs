@@ -9,7 +9,7 @@ namespace Opti.Models
     public class DashboardModel
     {
 
-
+        /*
         public List<Dashboard> Pesquisar()
         {
             DashboardModel pm = new DashboardModel();
@@ -17,6 +17,6 @@ namespace Opti.Models
 
             return dashboard.ToList();
         }
-
+        */
     }
 }

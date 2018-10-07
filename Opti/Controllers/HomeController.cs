@@ -34,6 +34,7 @@ namespace Opti.Controllers
             return View();
         }
 
+        /*
         [HttpGet]
         public JsonResult Dashboard()
         {
@@ -42,6 +43,6 @@ namespace Opti.Controllers
 
             return Json(lp, JsonRequestBehavior.AllowGet);
         }
-
+        */
     }
 }

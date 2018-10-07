@@ -42,6 +42,14 @@ namespace Opti.Models
 
         public string Concluir(OrdemProducao op)
         {
+            List<OrdemProducao> lop = Pesquisar(op.ordemProducaoID, 0, 0);
+            Produtos produtos = new Produtos();
+            List<Produtos> lp = produtos.Pesquisar(lop[0].produtoID, "");
+
+            lp[0].produtoID = lop[0].produtoID;
+            lp[0].qntEstoque = (lp[0].qntEstoque + lop[0].quantidade);
+            produtos.Alterar(lp[0]);
+
             OrdemProducaoModel opm = new OrdemProducaoModel();
             return opm.Concluir(op);
         }
