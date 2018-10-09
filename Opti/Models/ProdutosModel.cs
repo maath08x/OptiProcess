@@ -163,12 +163,13 @@ namespace Opti.Models
                 Produtos produtos = pm.Produtos.Single(c => c.produtoID.Equals(p.produtoID));
                 //--Corrigir alterar
 
-                produtos.descricao = p.descricao;
-                produtos.estoqueSeguranca = p.estoqueSeguranca;
-                produtos.leadTime = p.leadTime;
-                produtos.nome = p.nome;
-                produtos.politicaLote = p.politicaLote;
-                produtos.unidadeMedida = p.unidadeMedida;
+                produtos.descricao = (p.descricao == null ? produtos.descricao : p.descricao);
+                produtos.estoqueSeguranca = (p.estoqueSeguranca == null ? produtos.estoqueSeguranca : p.estoqueSeguranca);
+                produtos.qntEstoque = (p.qntEstoque == null ? produtos.qntEstoque : p.qntEstoque);
+                produtos.leadTime = (p.leadTime == null ? produtos.leadTime : p.leadTime);
+                produtos.nome = (p.nome == null ? produtos.nome : p.nome);
+                produtos.politicaLote = (p.politicaLote == null ? produtos.politicaLote : p.politicaLote);
+                produtos.unidadeMedida = (p.unidadeMedida == 0 ? produtos.unidadeMedida : p.unidadeMedida);
 
                 pm.SaveChanges();
 

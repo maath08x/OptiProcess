@@ -131,5 +131,13 @@ namespace Opti.Controllers
 
             return pedidos.VerificaFinaliza(pedidos.pedidoID);
         }
+
+        [HttpPost]
+        public string EmitirOP()
+        {
+            pedidos.pedidoID = Convert.ToInt32((Request.Params["PedidoID"] == "" ? "0" : Request.Params["PedidoID"]));
+
+            return pedidos.EmitirOP(pedidos.pedidoID);
+        }
     }
 }

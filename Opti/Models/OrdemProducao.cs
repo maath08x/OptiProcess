@@ -10,31 +10,16 @@ namespace Opti.Models
     public partial class OrdemProducao
     {
         [Key]
-        [Column(Order = 0)]
         public int ordemProducaoID { get; set; }
-
-        [Key]
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        
         public int produtoID { get; set; }
-
-        [Key]
-        [Column(Order = 2)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        
         public int quantidade { get; set; }
-
-        [Key]
-        [Column(Order = 3)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        
         public int maquinarioID { get; set; }
-
-        [Key]
-        [Column(Order = 4)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        
         public int pedidoID { get; set; }
-
-        [Key]
-        [Column(Order = 5)]
+        
         public DateTime dtOrdemProd { get; set; }
 
         public DateTime? dtPrevisao { get; set; }
@@ -57,6 +42,14 @@ namespace Opti.Models
 
         public string Concluir(OrdemProducao op)
         {
+            List<OrdemProducao> lop = Pesquisar(op.ordemProducaoID, 0, 0);
+            Produtos produtos = new Produtos();
+            List<Produtos> lp = produtos.Pesquisar(lop[0].produtoID, "");
+
+            lp[0].produtoID = lop[0].produtoID;
+            lp[0].qntEstoque = (lp[0].qntEstoque + lop[0].quantidade);
+            produtos.Alterar(lp[0]);
+
             OrdemProducaoModel opm = new OrdemProducaoModel();
             return opm.Concluir(op);
         }
