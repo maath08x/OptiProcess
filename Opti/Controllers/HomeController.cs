@@ -35,13 +35,36 @@ namespace Opti.Controllers
         }
 
         [HttpGet]
-        public JsonResult Dashboard()
+        public JsonResult DashboardMensal()
         {
             //dashboard.pedidoID = Convert.ToInt16(Request.Params["id"]);
-            List<Dashboard> lp = dashboard.Pesquisar();
+            List<Dashboard> lp = dashboard.PesquisarMensal();
 
             return Json(lp, JsonRequestBehavior.AllowGet);
         }
+
+
+
+        [HttpGet]
+        public JsonResult DashboardProduto()
+        {
+            //dashboard.pedidoID = Convert.ToInt16(Request.Params["id"]);
+            List<Dashboard> lp = dashboard.PesquisarProduto();
+
+            return Json(lp, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        [HttpGet]
+        public JsonResult DashboardDiario()
+        {
+            //dashboard.pedidoID = Convert.ToInt16(Request.Params["id"]);
+            List<Dashboard> lp = dashboard.PesquisarDiario();
+
+            return Json(lp, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }

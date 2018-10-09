@@ -32,11 +32,26 @@ namespace Opti.Models
         public DateTime? dtPrevisao { get; set; }
 
 
-        public List<Dashboard> Pesquisar()
+        public List<Dashboard> PesquisarMensal()
         {
             DashboardModel pm = new DashboardModel();
-            return pm.Pesquisar();
+            return pm.PesquisarMensal();
         }
+
+        public List<Dashboard> PesquisarProduto()
+        {
+            DashboardModel pm = new DashboardModel();
+            return pm.PesquisarProduto();
+        }
+
+        public List<Dashboard> PesquisarDiario()
+        {
+            DashboardModel pm = new DashboardModel();
+            return pm.PesquisarDiario();
+        }
+
+
+
 
     }
 

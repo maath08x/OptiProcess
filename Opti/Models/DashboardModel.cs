@@ -10,7 +10,23 @@ namespace Opti.Models
     {
 
 
-        public List<Dashboard> Pesquisar()
+        public List<Dashboard> PesquisarMensal()
+        {
+            DashboardModel pm = new DashboardModel();
+            IEnumerable<Dashboard> dashboard;
+
+            return dashboard.ToList();
+        }
+
+        public List<Dashboard> PesquisarProduto()
+        {
+            DashboardModel pm = new DashboardModel();
+            IEnumerable<Dashboard> dashboard;
+
+            return dashboard.ToList();
+        }
+
+        public List<Dashboard> PesquisarDiario()
         {
             DashboardModel pm = new DashboardModel();
             IEnumerable<Dashboard> dashboard;
