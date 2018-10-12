@@ -23,7 +23,7 @@ function validaAcesso() {
 
     if (usuario == null) {
 
-        toastr.info("", "Sua Sessão Expirou !")  
+        //toastr.info("", "Sua Sessão Expirou !");  
         var urlsair = "http://" + location.host + "/Login";
 
         window.location.href = (urlsair);
