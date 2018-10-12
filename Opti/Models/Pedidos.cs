@@ -130,6 +130,7 @@ namespace Opti.Models
             OrdemProducao op = new OrdemProducao();
             List<PedidosProdutos> lpp = pm.PesquisarPedidosProdutos(pedidoID, 0);
             List<OrdemProducao> lop = op.Pesquisar(0, 0, pedidoID);
+            List<Pedidos> lpedidos = Pesquisar(pedidoID,0);
 
             // Conclui as OP's nao concluídas
             for (int i = 0; i < lop.Count; i++)
@@ -141,15 +142,32 @@ namespace Opti.Models
                 }
             }
 
-            // Movimenta o estoque dos produtos
-            for (int i = 0; i < lpp.Count; i++)
+            if (lpedidos[0].tipoPedido == 5)
             {
-                Produtos produtos = new Produtos();
-                List<Produtos> lp = produtos.Pesquisar(lpp[i].produtoID, "");
+                // Movimenta o estoque dos produtos
+                for (int i = 0; i < lpp.Count; i++)
+                {
+                    Produtos produtos = new Produtos();
+                    List<Produtos> lp = produtos.Pesquisar(lpp[i].produtoID, "");
 
-                lp[i].qntEstoque = (lp[i].qntEstoque - lpp[i].qntPedido);
-                produtos.Alterar(lp[i]);
+                    lp[i].qntEstoque = (lp[i].qntEstoque - lpp[i].qntPedido);
+                    produtos.Alterar(lp[i]);
 
+                }
+            }
+
+            if (lpedidos[0].tipoPedido == 4)
+            {
+                // Movimenta o estoque dos produtos
+                for (int i = 0; i < lpp.Count; i++)
+                {
+                    Produtos produtos = new Produtos();
+                    List<Produtos> lp = produtos.Pesquisar(lpp[i].produtoID, "");
+
+                    lp[i].qntEstoque = (lp[i].qntEstoque + lpp[i].qntPedido);
+                    produtos.Alterar(lp[i]);
+
+                }
             }
         }
         #endregion
