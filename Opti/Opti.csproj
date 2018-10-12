@@ -170,8 +170,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Dashboard.cs" />
-    <Compile Include="Models\DashboardModel.cs" />
+    <Compile Include="Models\Dashboards.cs" />
+    <Compile Include="Models\Home.cs" />
     <Compile Include="Models\Logins.cs" />
     <Compile Include="Models\LoginsModel.cs" />
     <Compile Include="Models\Maquinarios.cs" />
@@ -1597,7 +1597,9 @@
     <Content Include="vendor\jquery\jquery.min.js" />
     <Content Include="vendor\jquery\jquery.slim.js" />
     <Content Include="vendor\jquery\jquery.slim.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

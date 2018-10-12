@@ -11,38 +11,32 @@ namespace Opti.Controllers
 {
     public class HomeController : Controller
     {
-
-        private static DashboardModel dashboardModel = new DashboardModel();
-        private static Dashboard dashboard = new Dashboard();
-
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-        /*
         [HttpGet]
-        public JsonResult Dashboard()
+        public JsonResult PrimeiroGrafico()
         {
-            //dashboard.pedidoID = Convert.ToInt16(Request.Params["id"]);
-            List<Dashboard> lp = dashboard.Pesquisar();
-
-            return Json(lp, JsonRequestBehavior.AllowGet);
+            Dashboards d = new Dashboards();
+            return Json(d.PrimeiroGrafico(), JsonRequestBehavior.AllowGet);
         }
-        */
+
+        [HttpGet]
+        public JsonResult SegundoGrafico()
+        {
+            Dashboards d = new Dashboards();
+            return Json(d.SegundoGrafico(), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public string TerceiroGrafico()
+        {
+            Dashboards d = new Dashboards();
+            string txt = JsonConvert.SerializeObject(d.TerceiroGrafico());
+
+            return txt;
+        }
     }
 }
