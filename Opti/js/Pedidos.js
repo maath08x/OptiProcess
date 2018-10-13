@@ -318,13 +318,13 @@ function EmitirOP(nPedidoID) {
 
 function EstoqueSeguro() {
 
-    var sRequest = "MediaProduto=" + mediaProduto + "&MediaFornecedor=" + mediaFornecedor;
+    var sRequest = "MediaProduto=" + mediaProduto.value + "&MediaFornecedor=" + mediaFornecedor.value;
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var response = JSON.parse(xhttp.response);
-            estoqueSeguro.value = response[0];
+            estoqueSeguro.value = response;
         }
     }
 
