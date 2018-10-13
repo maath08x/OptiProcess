@@ -12,6 +12,8 @@ namespace Opti.Controllers
     public class PedidosController : Controller
     {
         private static Pedidos pedidos = new Pedidos();
+        private static Produtos produtos = new Produtos();
+        private static ProdutosModel produtosModel = new ProdutosModel();
         private static PedidosProdutos pedidosProdutos = new PedidosProdutos();
         private static PedidosModel pedidosModel = new PedidosModel();
         // GET: Pedidos
@@ -22,6 +24,7 @@ namespace Opti.Controllers
             ViewBag.AtributosGrid = new List<string>();
             ViewBag.AtributosEditable = new List<string>();
             ViewBag.AtributosAddDiff = new List<string>();
+            ViewBag.AtributosEstoSeguro = new List<string>();
 
             ViewBag.AtributosSearch.Add("ID");
             ViewBag.AtributosSearch.Add("Pessoa ID");
@@ -140,5 +143,18 @@ namespace Opti.Controllers
 
             return pedidos.EmitirOP(pedidos.pedidoID);
         }
+
+        [HttpPost]
+        public int EstoqueSeguro()
+        {
+            int mediaProduto;
+            int mediaFornecedor;
+
+            mediaProduto = Convert.ToInt32((Request.Params["MediaProduto"] == "" ? "0" : Request.Params["mediaProduto"]));
+            mediaFornecedor = Convert.ToInt32((Request.Params["MediaFornecedor"] == "" ? "0" : Request.Params["mediaFornecedor"]));
+
+            return produtos.EstoqueSeguro(mediaProduto,mediaFornecedor);
+        }
+
     }
 }

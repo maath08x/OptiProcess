@@ -314,3 +314,25 @@ function EmitirOP(nPedidoID) {
     xhttp.open("POST", sURL, true);
     xhttp.send();
 }
+
+
+function EstoqueSeguro() {
+
+    var sRequest = "MediaProduto=" + mediaProduto + "&MediaFornecedor=" + mediaFornecedor;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = JSON.parse(xhttp.response);
+            estoqueSeguro.value = response[0];
+        }
+    }
+
+    var sURL = "http://" + location.host + "/Pedidos/EstoqueSeguro?" + sRequest;
+
+    xhttp.open("POST", sURL, true);
+    xhttp.send();
+
+
+}
+
