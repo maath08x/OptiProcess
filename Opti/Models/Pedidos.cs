@@ -303,14 +303,8 @@ namespace Opti.Models
             produtos.estoqueSeguranca = estoqueSeguro;
             produtos.Alterar(produtos);
 
-            /*
-                         
-             media de produto mensal (produto mensal divido por 22) nao faz sentido algum
-             media de entrada mensal (fornecedor entrgar)  
-              dias uteis em 1 ano 250            
-            */
-
-            return 1;
+         
+            return estoqueSeguro;
 
 
         }
