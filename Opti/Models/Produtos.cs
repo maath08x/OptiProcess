@@ -246,6 +246,15 @@ namespace Opti.Models
             List<Produtos> lp = p.Pesquisar(produtoID, "");
             int qntDisponivel = lp[0].qntEstoque - lp[0].qntEstoqueReservado;
 
+            // Estoque de segurança
+            if (nivel == 1)
+            {
+                int qntSeguranca = EstoqueSeguro(produtoID);
+
+                if ((qntDisponivel - qntSolicitada) < qntSeguranca)
+                    qntSolicitada = (qntSeguranca + qntSolicitada) - qntDisponivel;
+            }
+
             if (qntSolicitada <= qntDisponivel)
             {
                 produtos[produtos.Length - 1][0] = produtoID.ToString();
@@ -290,6 +299,69 @@ namespace Opti.Models
                     }
                 }
             }
+        }
+
+        public int EstoqueSeguro(int produtoID)
+        {
+            int estoqueSeguro;
+            int mediaProduto = 0;
+            int mediaFornecedor = 0;
+            PedidosModel pm = new PedidosModel();
+            List<PedidosProdutos> lpp = pm.PesquisarPedidosProdutos(0, 0, produtoID);
+            Produtos produtos = new Produtos();
+            int diasUteis = 250;
+            TimeSpan dtDiferenca;
+            int dias;
+
+            //Percorre a lista
+            for (int i = 0; i < lpp.Count; i++)
+            {
+
+
+                List<Produtos> lp = produtos.Pesquisar(lpp[i].produtoID, "");
+
+                if (lpp[i].Pedidos.tipoPedido == 4 && lpp[i].Pedidos.dtPedido > DateTime.Now.AddYears(-1))
+                {
+
+                    //dtDiferenca= (DateTime.Parse(lpp[i].Pedidos.dtPrevisao) - DateTime.Parse(lpp[i].Pedidos.dtPedido));
+                    dtDiferenca = Convert.ToDateTime(lpp[i].Pedidos.dtPrevisao).Subtract(Convert.ToDateTime(lpp[i].Pedidos.dtPedido));
+                    mediaFornecedor = mediaFornecedor + dtDiferenca.Days;
+
+                }
+
+            }
+
+
+            for (int i = 0; i < lpp.Count; i++)
+            {
+                List<Produtos> lp = produtos.Pesquisar(lpp[i].produtoID, "");
+
+                if (lpp[i].Pedidos.tipoPedido == 5 && lpp[i].Pedidos.dtPedido > DateTime.Now.AddYears(-1))
+                {
+
+                    mediaProduto = (mediaProduto + lpp[i].qntPedido);
+                }
+
+            }
+
+            //fornecedor          
+            mediaFornecedor = mediaFornecedor / diasUteis;
+
+
+            //produtos
+            mediaProduto = mediaProduto / diasUteis;
+
+
+            estoqueSeguro = mediaProduto * mediaFornecedor;
+
+
+            produtos.estoqueSeguranca = estoqueSeguro;
+            produtos.Alterar(produtos);
+
+
+            return estoqueSeguro;
+
+
         }
 
         #endregion
