@@ -1,6 +1,17 @@
 ﻿var glb_nProdutoID;
 var glb_nSubProdutoID;
 
+var glb_Tipos;
+var xhttpTipos = new XMLHttpRequest();
+xhttpTipos.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        glb_Tipos = JSON.parse(xhttpTipos.response);
+    }
+};
+var sURL = "http://" + location.host + "/TiposGerais/Pesquisar?TelaID=1";
+xhttpTipos.open("GET", sURL, true);
+xhttpTipos.send();
+
 function Adicionar() {
     var sDescricao = document.getElementById("Descrição_Add");
     var nLeadTime = document.getElementById("LeadTime_Add");
@@ -171,7 +182,12 @@ function idAtualDetail(nProdutoID) {
                     sInner = "";
                     for (var i = 0; i < response.length; i++) {
                         sInner += "<tr>";
-                        sInner += "<td id=\"tipoMaquinario" + i + "\">" + response[i]["tipoMaquinario"] + "</td>";
+
+                        for (var x = 0; x < glb_Tipos.length; x++) {
+                            if (glb_Tipos[x]["tipoID"] == response[i]["tipoMaquinario"]) {
+                                sInner += "<td id=\"tipoMaquinario" + i + "\">" + glb_Tipos[x]["nome"] + "</td>";
+                            }
+                        }
                         sInner += "<td><button type=\"button\" class=\"btn btn-danger d-md-inline-block form-inline mr-0 mr-md-2 ml-3\" onclick=\"DeletarMaqProduto(" + response[i]["produtosMaquinariosID"] + ")\"><div class=\"fas fa-fw fa-times\"></div></button></td>";
                         sInner += "</tr>";
                     }

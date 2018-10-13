@@ -68,7 +68,7 @@ namespace Opti.Controllers
         public JsonResult Pesquisar()
         {
             pessoas.pessoaID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
-            pessoas.nome = Request.Params["Nome"];
+            pessoas.nome = (Request.Params["Nome"] == null ? "" : Request.Params["Nome"]);
             pessoas.tipoPessoa = Convert.ToInt32((Request.Params["Tipo"] == "" ? "0" : Request.Params["Tipo"]));
             List<Pessoas> lp = pessoas.Pesquisar(pessoas.pessoaID, pessoas.nome, pessoas.tipoPessoa);
 

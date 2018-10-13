@@ -1,5 +1,16 @@
 ﻿var glb_nPessoaID;
 
+var glb_Tipos;
+var xhttpTipos = new XMLHttpRequest();
+xhttpTipos.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        glb_Tipos = JSON.parse(xhttpTipos.response);
+    }
+};
+var sURL = "http://" + location.host + "/TiposGerais/Pesquisar?TelaID=3";
+xhttpTipos.open("GET", sURL, true);
+xhttpTipos.send();
+
 function Pesquisar() {
     var nID = document.getElementById("ID_Search");
     var sNome = document.getElementById("Nome_Search");
@@ -19,7 +30,12 @@ function Pesquisar() {
                 sInner += "<td id=\"pessoaID" + i + "\">" + (response[i]["pessoaID"] == null ? "0" : response[i]["pessoaID"]) + "</td>";
                 sInner += "<td id=\"nome" + i + "\">" + response[i]["nome"] + "</td>";
                 sInner += "<td id=\"fantasia" + i + "\">" + response[i]["fantasia"] + "</td>";
-                sInner += "<td id=\"tipoPessoa" + i + "\">" + (response[i]["tipoPessoa"] == null ? "0" : response[i]["tipoPessoa"]) + "</td>";
+
+                for (var x = 0; x < glb_Tipos.length; x++) {
+                    if (glb_Tipos[x]["tipoID"] == response[i]["tipoPessoa"]) {
+                        sInner += "<td id=\"tipoPessoa" + i + "\">" + glb_Tipos[x]["nome"] + "</td>";
+                    }
+                }
                 
                 if (response[i]["nascimento"] != null) {
                     dt = new Date(parseInt(response[i]["nascimento"].replace('/Date(', '')));

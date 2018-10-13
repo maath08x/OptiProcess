@@ -1,6 +1,39 @@
 ﻿var glb_nPedidoID;
 var glb_nPedidoProdutoID;
 
+var glb_Pessoas;
+var xhttpPessoas = new XMLHttpRequest();
+xhttpPessoas.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        glb_Pessoas = JSON.parse(xhttpPessoas.response);
+    }
+};
+var sURL = "http://" + location.host + "/Pessoas/Pesquisar?";
+xhttpPessoas.open("GET", sURL, true);
+xhttpPessoas.send();
+
+var glb_Tipos;
+var xhttpTipos = new XMLHttpRequest();
+xhttpTipos.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        glb_Tipos = JSON.parse(xhttpTipos.response);
+    }
+};
+var sURL = "http://" + location.host + "/TiposGerais/Pesquisar?TelaID=2";
+xhttpTipos.open("GET", sURL, true);
+xhttpTipos.send();
+
+var glb_Produtos;
+var xhttpProdutos = new XMLHttpRequest();
+xhttpProdutos.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        glb_Produtos = JSON.parse(xhttpProdutos.response);
+    }
+};
+var sURL = "http://" + location.host + "/Produtos/Pesquisar?";
+xhttpProdutos.open("GET", sURL, true);
+xhttpProdutos.send();
+
 function Pesquisar() {
     var nID = document.getElementById("ID_Search");
     var nPessoaID = document.getElementById("PessoaID_Search");
@@ -19,8 +52,19 @@ function Pesquisar() {
                 sInner += "<tr>";
 
                 sInner += "<td id=\"pedidoID" + i + "\">" + response[i]["pedidoID"] + "</td>";
-                sInner += "<td id=\"pessoaID" + i + "\">" + response[i]["pessoaID"] + "</td>";
-                sInner += "<td id=\"tipoPedido" + i + "\">" + response[i]["tipoPedido"] + "</td>";
+
+                for (var x = 0; x < glb_Pessoas.length; x++) {
+                    if (glb_Pessoas[x]["pessoaID"] == response[i]["pessoaID"]) {
+                        sInner += "<td id=\"pessoaID" + i + "\">" + glb_Pessoas[x]["nome"] + "</td>";
+                    }
+                }
+
+                for (var x = 0; x < glb_Tipos.length; x++) {
+                    if (glb_Tipos[x]["tipoID"] == response[i]["tipoPedido"]) {
+                        sInner += "<td id=\"tipoPedido" + i + "\">" + glb_Tipos[x]["nome"] + "</td>";
+                    }
+                }
+
                 if (response[i]["dtPedido"] != null) {
                     dt = new Date((response[i]["dtPedido"]));
                     sInner += "<td id=\"dtPedido" + i + "\">" + dt.toLocaleDateString() + "</td>";
@@ -116,8 +160,19 @@ function idAtualDetail(nPedidoID) {
             sInner += "<tr>";
 
             sInner += "<td id=\"pedidoID" + 0 + "\">" + response[0]["Pedidos"]["pedidoID"] + "</td>";
-            sInner += "<td id=\"pessoaID" + 0 + "\">" + response[0]["Pedidos"]["pessoaID"] + "</td>";
-            sInner += "<td id=\"tipoPedido" + 0 + "\">" + response[0]["Pedidos"]["tipoPedido"] + "</td>";
+
+            for (var x = 0; x < glb_Pessoas.length; x++) {
+                if (glb_Pessoas[x]["pessoaID"] == response[0]["Pedidos"]["pessoaID"]) {
+                    sInner += "<td id=\"pessoaID" + 0 + "\">" + glb_Pessoas[x]["nome"] + "</td>";
+                }
+            }
+
+            for (var x = 0; x < glb_Tipos.length; x++) {
+                if (glb_Tipos[x]["tipoID"] == response[0]["Pedidos"]["tipoPedido"]) {
+                    sInner += "<td id=\"tipoPedido" + 0 + "\">" + glb_Tipos[x]["nome"] + "</td>";
+                }
+            }
+
             if (response[0]["Pedidos"]["dtPedido"] != null) {
                 dt = new Date((response[0]["Pedidos"]["dtPedido"]));
                 sInner += "<td id=\"dtPedido" + 0 + "\">" + dt.toLocaleDateString() + "</td>";
@@ -143,7 +198,14 @@ function idAtualDetail(nPedidoID) {
             sInner = "";
             for (var i = 0; i < response.length; i++) {
                 sInner += "<tr>";
-                sInner += "<td id=\"produtoID" + i + "\">" + response[i]["produtoID"] + "</td>";
+
+                for (var x = 0; x < glb_Tipos.length; x++) {
+                    if (glb_Produtos[x]["produtoID"] == response[i]["produtoID"]) {
+                        sInner += "<td id=\"produtoID" + i + "\">" + glb_Produtos[x]["nome"] + "</td>";
+                    }
+                }
+                
+
                 sInner += "<td id=\"qntPedido" + i + "\">" + response[i]["qntPedido"] + "</td>";
                 sInner += "<td id=\"btn" + i + "\"><button type=\"button\" class=\"btn btn-primary d-md-inline-block form-inline mr-0 mr-md-2 ml-3\" data-toggle=\"modal\" data-target=\"#editProdutoModal\" onclick=\"pedProdutoID(" + response[i]["pedProdutosID"] + ")\"><div class=\"fas fa-fw fa-pen\"></div></button>";
                 sInner += "<button type=\"button\" class=\"btn btn-danger d-md-inline-block form-inline mr-0 mr-md-2 ml-3\" onclick=\"DeletarProduto(" + response[i]["pedProdutosID"] + ")\"><div class=\"fas fa-fw fa-times\"></div></button></td>";
