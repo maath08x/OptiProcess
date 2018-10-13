@@ -20,10 +20,10 @@ namespace Opti.Models
         public virtual Pedidos Pedidos { get; set; }
 
         #region "Métodos CRUD"
-        public List<PedidosProdutos> Pesquisar(int pedidoID, int pedidoProdutoID)
+        public List<PedidosProdutos> Pesquisar(int pedidoID, int pedidoProdutoID, int produtoID)
         {
             PedidosModel pm = new PedidosModel();
-            return pm.PesquisarPedidosProdutos(pedidoID, pedidoProdutoID);
+            return pm.PesquisarPedidosProdutos(pedidoID, pedidoProdutoID, produtoID);
         }
 
         public string Deletar(int pedProdutoID)

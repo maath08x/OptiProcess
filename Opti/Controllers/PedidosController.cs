@@ -60,7 +60,8 @@ namespace Opti.Controllers
         {
             int pedidoID = Convert.ToInt32((Request.Params["PedidoID"] == "" ? "0" : Request.Params["PedidoID"]));
             int pedidoProdutoID = Convert.ToInt32((Request.Params["PedidoProdutoID"] == "" ? "0" : Request.Params["PedidoProdutoID"]));
-            List<PedidosProdutos> lpp = pedidosProdutos.Pesquisar(pedidoID, pedidoProdutoID);
+            int produtoID = Convert.ToInt32((Request.Params["ProdutoID"] == "" ? "0" : Request.Params["ProdutoID"]));
+            List<PedidosProdutos> lpp = pedidosProdutos.Pesquisar(pedidoID, pedidoProdutoID, produtoID);
 
             string txt = JsonConvert.SerializeObject(lpp);
 

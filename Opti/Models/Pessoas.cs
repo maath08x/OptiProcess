@@ -60,8 +60,18 @@ namespace Opti.Models
 
         public string Adicionar(Pessoas pessoas, Logins logins)
         {
-            PessoasModel pm = new PessoasModel();
-            return pm.Adicionar(pessoas, logins);
+            LoginsModel lm = new LoginsModel();
+            List<Logins> lp = lm.Pesquisar(logins.login, 0);
+
+            if (lp.Count == 0)
+            {
+                PessoasModel pm = new PessoasModel();
+                return pm.Adicionar(pessoas, logins);
+            }
+            else
+            {
+                return "Este usuário já existe em nosso sistema.";
+            }
         }
 
         public string Adicionar(Pessoas pessoas)

@@ -115,7 +115,7 @@ namespace Opti.Models
                 lm.Inserir(login);
                 return "Pessoa cadastrada";
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return "Não foi possível cadastrar esta pessoa.";
             }

@@ -67,7 +67,7 @@ namespace Opti.Models
         public List<PedidosProdutos> PesquisaProdutos(int pedidoID)
         {
             PedidosModel pm = new PedidosModel();
-            return pm.PesquisarPedidosProdutos(pedidoID,0);
+            return pm.PesquisarPedidosProdutos(pedidoID,0,0);
         }
         #endregion
 
@@ -92,7 +92,7 @@ namespace Opti.Models
         {
             PedidosModel pm = new PedidosModel();
             List<Pedidos> lp = pm.Pesquisar(pedidoID, 0);
-            List<PedidosProdutos> lpp = pm.PesquisarPedidosProdutos(pedidoID, 0);
+            List<PedidosProdutos> lpp = pm.PesquisarPedidosProdutos(pedidoID, 0, 0);
 
             string retorno = Verifica(lpp);
 
@@ -128,7 +128,7 @@ namespace Opti.Models
         {
             PedidosModel pm = new PedidosModel();
             OrdemProducao op = new OrdemProducao();
-            List<PedidosProdutos> lpp = pm.PesquisarPedidosProdutos(pedidoID, 0);
+            List<PedidosProdutos> lpp = pm.PesquisarPedidosProdutos(pedidoID, 0, 0);
             List<OrdemProducao> lop = op.Pesquisar(0, 0, pedidoID);
             List<Pedidos> lpedidos = Pesquisar(pedidoID,0);
 

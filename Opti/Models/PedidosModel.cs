@@ -49,13 +49,15 @@ namespace Opti.Models
             return pedido.ToList();
         }
 
-        public List<PedidosProdutos> PesquisarPedidosProdutos(int pedidoID, int pedProdutosID)
+        public List<PedidosProdutos> PesquisarPedidosProdutos(int pedidoID, int pedProdutosID, int produtoID)
         {
             PedidosModel pm = new PedidosModel();
             IEnumerable<PedidosProdutos> pp;
 
             if (pedProdutosID != 0)
                 pp = from p in pm.PedidosProdutos where p.pedProdutosID == pedProdutosID select p;
+            else if (produtoID != 0)
+                pp = from p in pm.PedidosProdutos where p.produtoID == produtoID select p;
             else
                 pp = from p in pm.PedidosProdutos where p.pedidoID == pedidoID select p;
 

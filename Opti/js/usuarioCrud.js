@@ -1,9 +1,8 @@
 ﻿var glb_nPessoaID;
 var glb_nTipo;
 
-
-function alterar() {
-
+function alterar()
+{
     var nome = document.getElementById("nome").value;
     var email = document.getElementById("email").value;
     var usuario = document.getElementById("usuario").value;
@@ -41,15 +40,16 @@ function inserir() {
     var senha = document.getElementById("senha").value;
     var confsenha = document.getElementById("confsenha").value;
     var tipoPessoa = "8";
-    var fantasia = nome.substring(0, nome.indexOf(" "));
+    var fantasia = nome.substring(0, (nome.indexOf(" ") == -1 ? nome.length : nome.indexOf(" ")));
 
-    if (senha != confsenha) {
+    if (senha != confsenha || nome == "" || email == "" || usuario == "" || senha == "" || confsenha == "") {
 
-        toastr.error("", "Senhas Divergentes !") 
+        //toastr.error("", "Senhas Divergentes!");
+        alert("Dados Inválidos!");
 
     } else {
 
-        var sRequest = "Nome=" + nome + "&Email=" + email + "Tipo=" + tipoPessoa + "&Fantasia=" + fantasia +
+        var sRequest = "Nome=" + nome + "&Email=" + email + "&Tipo=" + tipoPessoa + "&Fantasia=" + fantasia +
             "&Usuario=" + usuario + "&Senha=" + senha;
 
         var xhttp = new XMLHttpRequest();
@@ -67,9 +67,8 @@ function inserir() {
     }
 }
 
-
-
-function pesquisarUser() {
+function pesquisarUser()
+{
 
     var usuario = window.localStorage.getItem("usuario");    
     
@@ -114,10 +113,10 @@ function pesquisarUser() {
     }
 
 
-        var sURL = "http://" + location.host + "/Login/Pesquisar?" + sRequest;
+    var sURL = "http://" + location.host + "/Login/Pesquisar?" + sRequest;
 
-        xhttp.open("GET", sURL, true);
-        xhttp.send();
+    xhttp.open("GET", sURL, true);
+    xhttp.send();
 
 
 }
