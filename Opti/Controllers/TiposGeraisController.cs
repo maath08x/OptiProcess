@@ -46,8 +46,9 @@ namespace Opti.Controllers
         public string Pesquisar()
         {
             tiposGerais.tipoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
-            tiposGerais.nome = Request.Params["Nome"];
-            List<TiposGerais> ltg = tiposGeraisModel.Pesquisar(tiposGerais.tipoID, tiposGerais.nome);
+            tiposGerais.nome = (Request.Params["Nome"] == null ? "" : Request.Params["Nome"]);
+            tiposGerais.telaID = Convert.ToInt32((Request.Params["TelaID"] == "" ? "0" : Request.Params["TelaID"]));
+            List<TiposGerais> ltg = tiposGeraisModel.Pesquisar(tiposGerais.tipoID, tiposGerais.nome, tiposGerais.telaID);
 
             string txt = JsonConvert.SerializeObject(ltg);
 

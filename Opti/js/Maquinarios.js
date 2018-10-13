@@ -1,5 +1,20 @@
 ﻿var glb_nMaquinarioID;
 
+var glb_Tipos;
+
+var xhttpg = new XMLHttpRequest();
+xhttpg.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        glb_Tipos = JSON.parse(xhttpg.response);
+    }
+};
+
+var sURL = "http://" + location.host + "/TiposGerais/Pesquisar?TelaID=1";
+
+xhttpg.open("GET", sURL, true);
+xhttpg.send();
+
+
 function Adicionar() {
     var nTipo = document.getElementById("Tipo_Add");
     var sNome = document.getElementById("Nome_Add");
@@ -38,9 +53,14 @@ function Pesquisar() {
 
                 sInner += "<td id=\"maquinarioID" + i + "\">" + response[i]["maquinarioID"] + "</td>";
                 sInner += "<td id=\"nome" + i + "\">" + response[i]["nome"] + "</td>";
-                sInner += "<td id=\"tipoMaquinario" + i + "\">" + response[i]["tipoMaquinario"] + "</td>";
+
+                for (var x = 0; x < glb_Tipos.length; x++) {
+                    if (glb_Tipos[x]["tipoID"] == response[i]["tipoMaquinario"]) {
+                        sInner += "<td id=\"tipoMaquinario" + i + "\">" + glb_Tipos[x]["nome"] + "</td>";
+                    }
+                }
                 sInner += "<td id=\"descricao" + i + "\">" + response[i]["descricao"] + "</td>";
-                sInner += "<td id=\"statusMaquinario" + i + "\">" + (response[i]["statusMaquinario"] == null ? "0" : response[i]["statusMaquinario"]) + "</td>";
+                sInner += "<td id=\"statusMaquinario" + i + "\">" + ((response[i]["statusMaquinario"] == null ? "0" : response[i]["statusMaquinario"]) == "0" ? "Liberado" : "Ocupado") + "</td>";
                 if (response[i]["dtOcupacao"] != null) {
                     dt = new Date(parseInt(response[i]["dtOcupacao"].replace('/Date(', '')));
                     sInner += "<td id=\"dtOcupacao" + i + "\">" + dt.toLocaleDateString() + "</td>";

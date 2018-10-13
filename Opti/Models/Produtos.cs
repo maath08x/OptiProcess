@@ -247,6 +247,7 @@ namespace Opti.Models
             int qntDisponivel = lp[0].qntEstoque - lp[0].qntEstoqueReservado;
 
             // Estoque de segurança
+            /*
             if (nivel == 1)
             {
                 int qntSeguranca = EstoqueSeguro(produtoID);
@@ -254,6 +255,7 @@ namespace Opti.Models
                 if ((qntDisponivel - qntSolicitada) < qntSeguranca)
                     qntSolicitada = (qntSeguranca + qntSolicitada) - qntDisponivel;
             }
+            */
 
             if (qntSolicitada <= qntDisponivel)
             {

@@ -27,7 +27,7 @@ namespace Opti.Models
                 .HasForeignKey(e => e.telaID);
         }
 
-        public List<TiposGerais> Pesquisar(int tipoID, string nome)
+        public List<TiposGerais> Pesquisar(int tipoID, string nome, int? telaID)
         {
             TiposGeraisModel tgm = new TiposGeraisModel();
             IEnumerable<TiposGerais> tiposGerais;
@@ -43,6 +43,10 @@ namespace Opti.Models
             else if (nome != "")
             {
                 tiposGerais = from p in tgm.TiposGerais where p.nome.Contains(nome) select p;
+            }
+            else if (telaID != 0)
+            {
+                tiposGerais = from p in tgm.TiposGerais where p.telaID == telaID select p;
             }
             else
             {

@@ -1,5 +1,27 @@
 ﻿var glb_nEditID;
 
+var glb_Produtos;
+var xhttpProdutos = new XMLHttpRequest();
+xhttpProdutos.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        glb_Produtos = JSON.parse(xhttpProdutos.response);
+    }
+};
+var sURL = "http://" + location.host + "/Produtos/Pesquisar?";
+xhttpProdutos.open("GET", sURL, true);
+xhttpProdutos.send();
+
+var glb_Maquinarios;
+var xhttpMaquinarios = new XMLHttpRequest();
+xhttpMaquinarios.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        glb_Maquinarios = JSON.parse(xhttpMaquinarios.response);
+    }
+};
+var sURL = "http://" + location.host + "/Maquinarios/Pesquisar?";
+xhttpMaquinarios.open("GET", sURL, true);
+xhttpMaquinarios.send();
+
 function Pesquisar() {
     var nOPID = document.getElementById("OPID_Search");
     var nProdutoID = document.getElementById("ProdutoID_Search");
@@ -18,9 +40,21 @@ function Pesquisar() {
                 sInner += "<tr>";
 
                 sInner += "<td id=\"ordemProducaoID" + i + "\">" + response[i]["ordemProducaoID"] + "</td>";
-                sInner += "<td id=\"produtoID" + i + "\">" + response[i]["produtoID"] + "</td>";
+
+                for (var x = 0; x < glb_Produtos.length; x++) {
+                    if (glb_Produtos[x]["produtoID"] == response[i]["produtoID"]) {
+                        sInner += "<td id=\"produtoID" + i + "\">" + glb_Produtos[x]["nome"] + "</td>";
+                    }
+                }
+                
                 sInner += "<td id=\"quantidade" + i + "\">" + response[i]["quantidade"] + "</td>";
-                sInner += "<td id=\"maquinarioID" + i + "\">" + response[i]["maquinarioID"] + "</td>";
+
+                for (var x = 0; x < glb_Maquinarios.length; x++) {
+                    if (glb_Maquinarios[x]["maquinarioID"] == response[i]["maquinarioID"]) {
+                        sInner += "<td id=\"maquinarioID" + i + "\">" + glb_Maquinarios[x]["nome"] + "</td>";
+                    }
+                }
+                
                 sInner += "<td id=\"pedidoID" + i + "\">" + response[i]["pedidoID"] + "</td>";
                 if (response[i]["dtOrdemProd"] != null) {
                     dt = new Date(parseInt(response[i]["dtOrdemProd"].replace('/Date(', '')));

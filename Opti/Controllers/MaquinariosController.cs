@@ -61,7 +61,7 @@ namespace Opti.Controllers
         public JsonResult Pesquisar()
         {
             maquinarios.maquinarioID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
-            maquinarios.nome = Request.Params["Nome"];
+            maquinarios.nome = (Request.Params["Nome"] == null ? "" : Request.Params["Nome"]);
             maquinarios.tipoMaquinario = Convert.ToInt32((Request.Params["Tipo"] == "" ? "0" : Request.Params["Tipo"]));
             List<Maquinarios> lm = maquinarios.Pesquisar(maquinarios.maquinarioID, maquinarios.nome, 0);
             

@@ -72,7 +72,7 @@ namespace Opti.Controllers
         public string Pesquisar()
         {
             produtos.produtoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
-            produtos.nome = Request.Params["Nome"];
+            produtos.nome = (Request.Params["Nome"] == null ? "" : Request.Params["Nome"]);
             List<Produtos> lp = produtos.Pesquisar(produtos.produtoID, produtos.nome);
 
             string txt = JsonConvert.SerializeObject(lp);
