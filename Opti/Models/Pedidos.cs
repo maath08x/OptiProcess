@@ -132,18 +132,20 @@ namespace Opti.Models
             List<OrdemProducao> lop = op.Pesquisar(0, 0, pedidoID);
             List<Pedidos> lpedidos = Pesquisar(pedidoID,0);
 
-            // Conclui as OP's nao concluídas
-            for (int i = 0; i < lop.Count; i++)
-            {
-                if (lop[i].dtConclusao == null)
-                {
-                    lop[i].dtConclusao = DateTime.Today;
-                    op.Concluir(lop[i]);
-                }
-            }
 
             if (lpedidos[0].tipoPedido == 5)
             {
+                // Conclui as OP's nao concluídas
+                for (int i = 0; i < lop.Count; i++)
+                {
+                    if (lop[i].dtConclusao == null)
+                    {
+                        lop[i].dtConclusao = DateTime.Today;
+                        op.Concluir(lop[i]);
+                    }
+                }
+
+            
                 // Movimenta o estoque dos produtos
                 for (int i = 0; i < lpp.Count; i++)
                 {
