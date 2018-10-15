@@ -53,6 +53,11 @@ namespace Opti.Models
             try
             {
                 opm.SaveChanges();
+
+                Produtos produtos = new Produtos();
+                produtos.SubtraiItens(op.ordemProducaoID);
+                produtos.SubtraiSubItens(op.ordemProducaoID);
+
                 return "OP emitida";
             }
             catch (Exception e)

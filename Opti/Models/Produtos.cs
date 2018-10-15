@@ -115,7 +115,7 @@ namespace Opti.Models
             }
 
             DateTime? menorData = lm[0].dtDesocupacao;
-            int menorMaquinario = 0;
+            int menorMaquinario = lm[0].maquinarioID;
             for (int i = 0; i < lm.Count; i++)
             {
                 if (lm[i].dtDesocupacao == null)
@@ -347,6 +347,26 @@ namespace Opti.Models
 
         }
 
+        #endregion
+
+        #region Movimentações de Estoque
+        public void SubtraiSubItens(int ordemProducaoID)
+        {
+            OrdemProducao ordemProducao = new OrdemProducao();
+            List<OrdemProducao> lop = ordemProducao.Pesquisar(ordemProducaoID,0,0);
+
+            ProdutosFilhos produtosFilhos = new ProdutosFilhos();
+            List<ProdutosFilhos> lp = produtosFilhos.Pesquisar(lop[0].produtoID,0);
+
+            for (int i = 0; i < lp.Count; i++)
+            {
+                Produtos produtos = new Produtos();
+                List<Produtos> listProdutos = produtos.Pesquisar(lp[i].filhoID,"");
+                listProdutos[0].produtoID = lp[i].filhoID;
+                listProdutos[0].qntEstoque = listProdutos[0].qntEstoque - (Convert.ToInt32(lop[0].quantidade) * Convert.ToInt32(lp[i].quantidade));
+                produtos.Alterar(listProdutos[0]);
+            }
+        }
         #endregion
     }
 }
