@@ -51,7 +51,7 @@ function Pesquisar() {
                 sInner += "<td id=\"produtoID" + i + "\">" + response[i]["produtoID"] + "</td>";
                 sInner += "<td id=\"nome" + i + "\">" + response[i]["nome"] + "</td>";
                 sInner += "<td id=\"descricao" + i + "\">" + response[i]["descricao"] + "</td>";
-                sInner += "<td id=\"estoque" + i + "\">" + (response[i]["estoque"] == null ? "0" : response[i]["estoque"]) + "</td>";
+                sInner += "<td id=\"qntEstoque" + i + "\">" + (response[i]["qntEstoque"] == null ? "0" : response[i]["qntEstoque"]) + "</td>";
                 sInner += "<td id=\"leadTime" + i + "\">" + (response[i]["leadTime"] == null ? "0" : response[i]["leadTime"]) + "</td>";
 
                 sInner += "<td id=\"btn" + i + "\"><button type=\"button\" class=\"btn btn-primary d-md-inline-block form-inline mr-0 mr-md-2 ml-3\" data-toggle=\"modal\" data-target=\"#editModal\" onclick=\"idAtual(" + response[i]["produtoID"] + ")\"><div class=\"fas fa-fw fa-pen\"></div></button>";
