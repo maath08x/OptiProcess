@@ -81,12 +81,12 @@ function Pesquisar() {
                 }
                 sInner += "<td id=\"finalizado" + i + "\">" + (response[i]["finalizado"] == true ? "Sim" : "Não") + "</td>";
 
-                sInner += "<td id=\"btn" + i + "\"><button type=\"button\" class=\"btn btn-primary d-md-inline-block form-inline mr-0 mr-md-2 ml-3\" data-toggle=\"modal\" data-target=\"#editModal\" onclick=\"idAtual(" + response[i]["pedidoID"] + ")\"><div class=\"fas fa-fw fa-pen\"></div></button>" +
-                    "<button type=\"button\" class=\"btn btn-primary d-md-inline-block form-inline mr-0 mr-md-2 ml-3\" data-toggle=\"modal\" data-target=\"#detailPedidosModal\" onclick=\"idAtualDetail(" + response[i]["pedidoID"] + ")\"><div class=\"fas fa-fw fa-book-open\"></div></button>";
+                sInner += "<td id=\"btn" + i + "\"><button type=\"button\" class=\"btn btn-primary from-control form-inline ml-1\" data-toggle=\"modal\" data-target=\"#editModal\" onclick=\"idAtual(" + response[i]["pedidoID"] + ")\"><div class=\"fas fa-fw fa-pen\"></div></button>" +
+                    "<button type=\"button\" class=\"btn btn-primary from-control form-inline ml-1\" data-toggle=\"modal\" data-target=\"#detailPedidosModal\" onclick=\"idAtualDetail(" + response[i]["pedidoID"] + ")\"><div class=\"fas fa-fw fa-book-open\"></div></button>";
 
                 if (!response[i]["finalizado"]) {
-                    sInner += "<button type=\"button\" class=\"btn btn-primary d-md-inline-block form-inline mr-0 mr-md-2 ml-3\" onclick=\"finalizarPedido(" + response[i]["pedidoID"] + ")\"><div class=\"fas fa-fw fa-check\"></div></button> ";
-                    sInner += "<button type=\"button\" class=\"btn btn-primary d-md-inline-block form-inline mr-0 mr-md-2 ml-3\" onclick=\"EmitirOP(" + response[i]["pedidoID"] + ")\"><div class=\"fas fa-fw fa-boxes\"></div></button></td > ";
+                    sInner += "<button type=\"button\" class=\"btn btn-primary from-control form-inline ml-1\" onclick=\"finalizarPedido(" + response[i]["pedidoID"] + ")\"><div class=\"fas fa-fw fa-check\"></div></button> ";
+                    sInner += "<button type=\"button\" class=\"btn btn-primary from-control form-inline\" onclick=\"EmitirOP(" + response[i]["pedidoID"] + ")\"><div class=\"fas fa-fw fa-boxes\"></div></button></td > ";
                 }
                 else
                     sInner += "</td>";
@@ -263,19 +263,33 @@ function AdicionarProduto() {
     var nProdutoID = document.getElementById("Add_ProdutoID");
     var nQntPedido = document.getElementById("Add_Quantidade");
 
-    var sRequest = "PedidoID=" + escape(glb_nPedidoID) + "&ProdutoID=" + escape(nProdutoID.value) + "&QntPedido=" + escape(nQntPedido.value);
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            alert(xhttp.responseText);
-        }
+    if (nQntPedido.value <= 0) {
+        alert("Por favor, utilize um numero inteiro diferente de zero.")
+        return;
     }
 
-    var sURL = "http://" + location.host + "/Pedidos/AdicionarPedidosProdutos?" + sRequest;
 
-    xhttp.open("POST", sURL, true);
-    xhttp.send();
+    if ((nQntPedido.value).indexOf(',') == -1 && (nQntPedido.value).indexOf('.') == -1) {
+
+        var sRequest = "PedidoID=" + escape(glb_nPedidoID) + "&ProdutoID=" + escape(nProdutoID.value) + "&QntPedido=" + escape(nQntPedido.value);
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                alert(xhttp.responseText);
+            }
+        }
+
+        var sURL = "http://" + location.host + "/Pedidos/AdicionarPedidosProdutos?" + sRequest;
+
+        xhttp.open("POST", sURL, true);
+        xhttp.send();
+    }
+    else
+    {
+        alert("Por favor, utilize um numero inteiro diferente de zero.");
+        return;
+    }
 }
 
 function DeletarProduto(nPedProdutoID) {
