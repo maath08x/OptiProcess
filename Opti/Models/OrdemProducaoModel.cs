@@ -55,8 +55,7 @@ namespace Opti.Models
                 opm.SaveChanges();
 
                 Produtos produtos = new Produtos();
-                produtos.SubtraiItens(op.ordemProducaoID);
-                produtos.SubtraiSubItens(op.ordemProducaoID);
+                produtos.SubtraiSubItens(op);
 
                 return "OP emitida";
             }

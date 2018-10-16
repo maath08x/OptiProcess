@@ -350,20 +350,17 @@ namespace Opti.Models
         #endregion
 
         #region Movimentações de Estoque
-        public void SubtraiSubItens(int ordemProducaoID)
+        public void SubtraiSubItens(OrdemProducao op)
         {
-            OrdemProducao ordemProducao = new OrdemProducao();
-            List<OrdemProducao> lop = ordemProducao.Pesquisar(ordemProducaoID,0,0);
-
             ProdutosFilhos produtosFilhos = new ProdutosFilhos();
-            List<ProdutosFilhos> lp = produtosFilhos.Pesquisar(lop[0].produtoID,0);
+            List<ProdutosFilhos> lp = produtosFilhos.Pesquisar(op.produtoID,0);
 
             for (int i = 0; i < lp.Count; i++)
             {
                 Produtos produtos = new Produtos();
                 List<Produtos> listProdutos = produtos.Pesquisar(lp[i].filhoID,"");
                 listProdutos[0].produtoID = lp[i].filhoID;
-                listProdutos[0].qntEstoque = listProdutos[0].qntEstoque - (Convert.ToInt32(lop[0].quantidade) * Convert.ToInt32(lp[i].quantidade));
+                listProdutos[0].qntEstoque = listProdutos[0].qntEstoque - (Convert.ToInt32(op.quantidade) * Convert.ToInt32(lp[i].quantidade));
                 produtos.Alterar(listProdutos[0]);
             }
         }
