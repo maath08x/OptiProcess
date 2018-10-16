@@ -29,7 +29,7 @@ namespace Opti.Controllers
             ViewBag.AtributosGrid.Add("Nome");
             ViewBag.AtributosGrid.Add("Descrição");
             ViewBag.AtributosGrid.Add("Estoque");
-            ViewBag.AtributosGrid.Add("LeadTime");
+            ViewBag.AtributosGrid.Add("LeadTime (Dias)");
 
             ViewBag.AtributosEditable.Add("Nome");
             ViewBag.AtributosEditable.Add("Descrição");
