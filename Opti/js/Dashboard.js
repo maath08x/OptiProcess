@@ -15,12 +15,12 @@ xhttp.onreadystatechange = function () {
         Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
         Chart.defaults.global.defaultFontColor = '#292b2c';
 
-        var hoje = new Date()
-        var dia = hoje.getDate()
+        var hoje = new Date();
+        var dia = hoje.getDate();
 
-        var mes = hoje.getMonth()
+        var mes = hoje.getMonth();
 
-        mes = monName[mes - 1].substring(0, 3)
+        mes = monName[mes - 1].substring(0, 3);
         var response = JSON.parse(this.response);
 
         // Area Chart Example
@@ -43,9 +43,10 @@ xhttp.onreadystatechange = function () {
                         mes + " " + (dia - 3),
                         mes + " " + (dia - 2),
                         mes + " " + (dia - 1),
-                        mes + " " + dia],
+                    mes + " " + dia
+                ],
                 datasets: [{
-                    label: "Produtos",
+                    label: "Pedidos",
                     lineTension: 0.3,
                     backgroundColor: "rgba(2,117,216,0.2)",
                     borderColor: "rgba(2,117,216,1)",
@@ -56,9 +57,23 @@ xhttp.onreadystatechange = function () {
                     pointHoverBackgroundColor: "rgba(2,117,216,1)",
                     pointHitRadius: 50,
                     pointBorderWidth: 2,
-                    data: [response[0]["Primeiro"],response[0]["Segundo"],response[0]["Terceiro"],response[0]["Quarto"],response[0]["Quinto"],response[0]["Sexto"],
-                        response[0]["Setimo"], response[0]["Oitavo"], response[0]["Nono"], response[0]["Decimo"], response[0]["DecimoPrimeiro"],
-                        response[0]["DecimoSegundo"], response[0]["DecimoTerceiro"],  response[0]["DecimoQuarto"], response[0]["DecimoQuinto"]]
+                    data: [
+                        response[0]["Primeiro"]
+                        response[0]["Segundo"],
+                        response[0]["Terceiro"],
+                        response[0]["Quarto"],
+                        response[0]["Quinto"],
+                        response[0]["Sexto"],
+                        response[0]["Setimo"],
+                        response[0]["Oitavo"],
+                        response[0]["Nono"],
+                        response[0]["Decimo"],
+                        response[0]["DecimoPrimeiro"],
+                        response[0]["DecimoSegundo"],
+                        response[0]["DecimoTerceiro"],
+                        response[0]["DecimoQuarto"],
+                        response[0]["DecimoQuinto"],
+                    ]
                 }],
             },
             options: {
@@ -113,8 +128,8 @@ function segundoGrafico(){
             dayName = new Array("Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado")
             monName = new Array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro")
 
-            var hoje = new Date()
-            var mes_ = hoje.getMonth()
+            var hoje = new Date();
+            var mes_ = hoje.getMonth();
             var response = JSON.parse(this.response);
 
             // Bar Chart Example

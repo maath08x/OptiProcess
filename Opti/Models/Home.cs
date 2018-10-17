@@ -123,21 +123,21 @@ namespace Opti.Models
             d = dm.Dashboards.SqlQuery(
                 "SELECT " +
                     "1 RollNo, " +
-                    "6 [Primeiro], " +
-                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 1, 103)) = (CONVERT(VARCHAR(103), dtPedido - 1, 103))) [Segundo], " +
-                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 2, 103)) = (CONVERT(VARCHAR(103), dtPedido - 2, 103))) [Terceiro], " +
-                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 3, 103)) = (CONVERT(VARCHAR(103), dtPedido - 3, 103))) [Quarto], " +
-                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 4, 103)) = (CONVERT(VARCHAR(103), dtPedido - 4, 103))) [Quinto], " +
-                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 5, 103)) = (CONVERT(VARCHAR(103), dtPedido - 5, 103))) [Sexto], " +
-                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 6, 103)) = (CONVERT(VARCHAR(103), dtPedido - 6, 103))) [Setimo], " +
-                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 7, 103)) = (CONVERT(VARCHAR(103), dtPedido - 7, 103))) [Oitavo], " +
-                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 8, 103)) = (CONVERT(VARCHAR(103), dtPedido - 8, 103))) [Nono], " +
-                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 9, 103)) = (CONVERT(VARCHAR(103), dtPedido - 9, 103))) [Decimo], " +
-                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 10,103)) = (CONVERT(VARCHAR(103), dtPedido - 10,103))) [DecimoPrimeiro], " +
-                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 11,103)) = (CONVERT(VARCHAR(103), dtPedido - 11,103))) [DecimoSegundo], " +
-                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 12,103)) = (CONVERT(VARCHAR(103), dtPedido - 12,103))) [DecimoTerceiro], " +
-                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 13,103)) = (CONVERT(VARCHAR(103), dtPedido - 13,103))) [DecimoQuarto], " +
-                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 14,103)) = (CONVERT(VARCHAR(103), dtPedido - 14,103))) [DecimoQuinto], " +
+                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 14,103)) = (CONVERT(VARCHAR(103), dtPedido, 103))) [Primeiro], " +
+                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 13,103)) = (CONVERT(VARCHAR(103), dtPedido, 103))) [Segundo], " +
+                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 12,103)) = (CONVERT(VARCHAR(103), dtPedido, 103))) [Terceiro], " +
+                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 11,103)) = (CONVERT(VARCHAR(103), dtPedido, 103))) [Quarto], " +
+                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 10,103)) = (CONVERT(VARCHAR(103), dtPedido, 103))) [Quinto], " +
+                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 9, 103)) = (CONVERT(VARCHAR(103), dtPedido, 103))) [Sexto], " +
+                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 8, 103)) = (CONVERT(VARCHAR(103), dtPedido, 103))) [Setimo], " +
+                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 7, 103)) = (CONVERT(VARCHAR(103), dtPedido, 103))) [Oitavo], " +
+                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 6, 103)) = (CONVERT(VARCHAR(103), dtPedido, 103))) [Nono], " +
+                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 5, 103)) = (CONVERT(VARCHAR(103), dtPedido, 103))) [Decimo], " +
+                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 4, 103)) = (CONVERT(VARCHAR(103), dtPedido, 103))) [DecimoPrimeiro], " +
+                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 3, 103)) = (CONVERT(VARCHAR(103), dtPedido, 103))) [DecimoSegundo], " +
+                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 2, 103)) = (CONVERT(VARCHAR(103), dtPedido, 103))) [DecimoTerceiro], " +
+                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE() - 1, 103)) = (CONVERT(VARCHAR(103), dtPedido, 103))) [DecimoQuarto], " +
+                    "(SELECT COUNT(PedidoID) FROM Pedidos WITH(NOLOCK) WHERE(CONVERT(VARCHAR(103), GETDATE(), 103)) = (CONVERT(VARCHAR(103), dtPedido, 103)))       [DecimoQuinto], " +
                     "0 QuartoMes, " + 
                     "0 TerceiroMes, " + 
                     "0 SegundoMes, " + 

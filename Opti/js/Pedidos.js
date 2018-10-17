@@ -152,66 +152,36 @@ function idAtualDetail(nPedidoID) {
         if (this.readyState == 4 && this.status == 200) {
 
             // Escreve na primeira tabela
-            var tBodyPedidoDetail = document.getElementById("tBodyPedidoDetail");
+            
+            var tBodyProdutoDetail = document.getElementById("tBodyProdutoDetail");
             var response = JSON.parse(xhttp.response);
             var sInner = "";
             var dt;
 
-            sInner += "<tr>";
-
-            sInner += "<td id=\"pedidoID" + 0 + "\">" + response[0]["Pedidos"]["pedidoID"] + "</td>";
-
-            for (var x = 0; x < glb_Pessoas.length; x++) {
-                if (glb_Pessoas[x]["pessoaID"] == response[0]["Pedidos"]["pessoaID"]) {
-                    sInner += "<td id=\"pessoaID" + 0 + "\">" + glb_Pessoas[x]["nome"] + "</td>";
-                }
-            }
-
-            for (var x = 0; x < glb_Tipos.length; x++) {
-                if (glb_Tipos[x]["tipoID"] == response[0]["Pedidos"]["tipoPedido"]) {
-                    sInner += "<td id=\"tipoPedido" + 0 + "\">" + glb_Tipos[x]["nome"] + "</td>";
-                }
-            }
-
-            if (response[0]["Pedidos"]["dtPedido"] != null) {
-                dt = new Date((response[0]["Pedidos"]["dtPedido"]));
-                sInner += "<td id=\"dtPedido" + 0 + "\">" + dt.toLocaleDateString() + "</td>";
-            }
-            else {
-                sInner += "<td id=\"dtPedido" + 0 + "\"></td>";
-            }
-            if (response[0]["Pedidos"]["dtPrevisao"] != null) {
-                dt = new Date((response[0]["Pedidos"]["dtPrevisao"]));
-                sInner += "<td id=\"dtPrevisao" + 0 + "\">" + dt.toLocaleDateString() + "</td>";
-            }
-            else {
-                sInner += "<td id=\"dtPrevisao" + 0 + "\"></td>";
-            }
-            sInner += "<td id=\"finalizado" + 0 + "\">" + (response[0]["Pedidos"]["finalizado"] == true ? "Sim" : "Não") + "</td>";
-
-            sInner += "</tr>";
-
-            tBodyPedidoDetail.innerHTML = sInner;
-
-            // Escreve na segunda tabela
-            var tBodyProdutoDetail = document.getElementById("tBodyProdutoDetail");
-            sInner = "";
-            for (var i = 0; i < response.length; i++) {
-                sInner += "<tr>";
-
-                for (var x = 0; x < glb_Tipos.length; x++) {
-                    if (glb_Produtos[x]["produtoID"] == response[i]["produtoID"]) {
-                        sInner += "<td id=\"produtoID" + i + "\">" + glb_Produtos[x]["nome"] + "</td>";
-                    }
-                }
+            if (response.length > 0) {
+                // Escreve na segunda tabela
                 
+                sInner = "";
+                for (var i = 0; i < response.length; i++) {
+                    sInner += "<tr>";
 
-                sInner += "<td id=\"qntPedido" + i + "\">" + response[i]["qntPedido"] + "</td>";
-                sInner += "<td id=\"btn" + i + "\"><button type=\"button\" class=\"btn btn-primary d-md-inline-block form-inline mr-0 mr-md-2 ml-3\" data-toggle=\"modal\" data-target=\"#editProdutoModal\" onclick=\"pedProdutoID(" + response[i]["pedProdutosID"] + ")\"><div class=\"fas fa-fw fa-pen\"></div></button>";
-                sInner += "<button type=\"button\" class=\"btn btn-danger d-md-inline-block form-inline mr-0 mr-md-2 ml-3\" onclick=\"DeletarProduto(" + response[i]["pedProdutosID"] + ")\"><div class=\"fas fa-fw fa-times\"></div></button></td>";
-                sInner += "</tr>";
+                    for (var x = 0; x < glb_Tipos.length; x++) {
+                        if (glb_Produtos[x]["produtoID"] == response[i]["produtoID"]) {
+                            sInner += "<td id=\"produtoID" + i + "\">" + glb_Produtos[x]["nome"] + "</td>";
+                        }
+                    }
+
+
+                    sInner += "<td id=\"qntPedido" + i + "\">" + response[i]["qntPedido"] + "</td>";
+                    sInner += "<td id=\"btn" + i + "\"><button type=\"button\" class=\"btn btn-primary d-md-inline-block form-inline mr-0 mr-md-2 ml-3\" data-toggle=\"modal\" data-target=\"#editProdutoModal\" onclick=\"pedProdutoID(" + response[i]["pedProdutosID"] + ")\"><div class=\"fas fa-fw fa-pen\"></div></button>";
+                    sInner += "<button type=\"button\" class=\"btn btn-danger d-md-inline-block form-inline mr-0 mr-md-2 ml-3\" onclick=\"DeletarProduto(" + response[i]["pedProdutosID"] + ")\"><div class=\"fas fa-fw fa-times\"></div></button></td>";
+                    sInner += "</tr>";
+                }
+                tBodyProdutoDetail.innerHTML = sInner;
             }
-            tBodyProdutoDetail.innerHTML = sInner;
+            else {
+                tBodyProdutoDetail.innerHTML = sInner;
+            }
         }
     }
 
@@ -408,7 +378,4 @@ function EstoqueSeguro() {
 
     xhttp.open("POST", sURL, true);
     xhttp.send();
-
-
 }
-
