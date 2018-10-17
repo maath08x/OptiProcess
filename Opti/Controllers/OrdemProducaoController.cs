@@ -17,11 +17,12 @@ namespace Opti.Controllers
         {
             ViewBag.Title = "Ordem de Produção";
             ViewBag.AtributosSearch = new List<string>();
+            ViewBag.AtributosSearchSel = new List<string>();
             ViewBag.AtributosGrid = new List<string>();
 
             ViewBag.AtributosSearch.Add("OP ID");
-            ViewBag.AtributosSearch.Add("Produto ID");
             ViewBag.AtributosSearch.Add("Pedido ID");
+            ViewBag.AtributosSearchSel.Add("SelProduto ID");
 
             ViewBag.AtributosGrid.Add("ID");
             ViewBag.AtributosGrid.Add("Produto");

@@ -5,6 +5,12 @@ var xhttpProdutos = new XMLHttpRequest();
 xhttpProdutos.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         glb_Produtos = JSON.parse(xhttpProdutos.response);
+
+        // Preenche combobox
+        selProduto = document.getElementById("SelProdutoID_Search");
+        for (var i = 0; i < glb_Produtos.length; i++) {
+            selProduto.innerHTML += "<option value=" + glb_Produtos[i]["produtoID"] + ">" + glb_Produtos[i]["nome"] + "</option>";
+        }
     }
 };
 var sURL = "http://" + location.host + "/Produtos/Pesquisar?";
@@ -24,7 +30,7 @@ xhttpMaquinarios.send();
 
 function Pesquisar() {
     var nOPID = document.getElementById("OPID_Search");
-    var nProdutoID = document.getElementById("ProdutoID_Search");
+    var nProdutoID = document.getElementById("SelProdutoID_Search");
     var nPedidoID = document.getElementById("PedidoID_Search");
 
     var sRequest = "OPID=" + escape(nOPID.value) + "&ProdutoID=" + escape(nProdutoID.value) + "&PedidoID=" + escape(nPedidoID.value);

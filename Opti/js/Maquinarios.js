@@ -6,6 +6,18 @@ var xhttpg = new XMLHttpRequest();
 xhttpg.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         glb_Tipos = JSON.parse(xhttpg.response);
+
+        // Preenche combobox
+        var selTipo = document.getElementById("SelTipo_Add");
+        for (var i = 0; i < glb_Tipos.length; i++) {
+            selTipo.innerHTML += "<option value=" + glb_Tipos[i]["tipoID"] + ">" + glb_Tipos[i]["nome"] + "</option>";
+        }
+
+        // Preenche combobox
+        selTipo = document.getElementById("SelTipo_Edit");
+        for (var i = 0; i < glb_Tipos.length; i++) {
+            selTipo.innerHTML += "<option value=" + glb_Tipos[i]["tipoID"] + ">" + glb_Tipos[i]["nome"] + "</option>";
+        }
     }
 };
 
@@ -14,9 +26,8 @@ var sURL = "http://" + location.host + "/TiposGerais/Pesquisar?TelaID=1";
 xhttpg.open("GET", sURL, true);
 xhttpg.send();
 
-
 function Adicionar() {
-    var nTipo = document.getElementById("Tipo_Add");
+    var nTipo = document.getElementById("SelTipo_Add");
     var sNome = document.getElementById("Nome_Add");
     var sDescricao = document.getElementById("Descrição_Add");
 
@@ -92,7 +103,7 @@ function Pesquisar() {
 function Alterar() {
     var nID = glb_nMaquinarioID;
     var sNome = document.getElementById("Nome_Edit");
-    var nTipo = document.getElementById("Tipo_Edit");
+    var nTipo = document.getElementById("SelTipo_Edit");
     var sDescricao = document.getElementById("Descrição_Edit");
 
     var sRequest = "ID=" + escape(nID) + "&Nome=" + escape(sNome.value) + "&Descricao=" + escape(sDescricao.value) + "&Tipo=" + escape(nTipo.value);
@@ -132,7 +143,7 @@ function idAtual(nMaquinarioID) {
     glb_nMaquinarioID = nMaquinarioID;
     var sRequest = "ID=" + escape(nMaquinarioID);
     var sNome = document.getElementById("Nome_Edit");
-    var nTipo = document.getElementById("Tipo_Edit");
+    var nTipo = document.getElementById("SelTipo_Edit");
     var sDescricao = document.getElementById("Descrição_Edit");
 
     var xhttp = new XMLHttpRequest();

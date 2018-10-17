@@ -15,6 +15,12 @@
                     n = n.Replace(" ", "");
                     <input type="text" class="form-control col-md-2 mr-md-3 ml-3" placeholder="@item" id="@n" />
                 }
+                foreach (var item in @ViewBag.AtributosSearchSel)
+                {
+                    string n = (@item + "_Search");
+                    n = n.Replace(" ", "");
+                    <select class="form-control col-md-2 mr-md-3 ml-3" id="@n"><option value=0>@n.Replace("Sel", "").Replace("_Search", "")</option></select>
+                }
             }
             <div class="row">
                 <button type="button" class="btn btn-primary d-md-inline-block form-inline mr-0 mr-md-3 ml-3" onclick="return Pesquisar();"><div class="fas fa-fw fa-search"></div></button>
@@ -31,7 +37,7 @@
                 {
                     <a type="button" class="btn btn-primary d-md-inline-block form-inline mr-0 mr-md-2 ml-3" href="@Url.Action("Index", "TiposGerais")"><div class="fas fa-fw fa-cogs"></div></a>
                 }
-                 @if (ViewBag.AtributosEstoSeguro != null)
+                @if (ViewBag.AtributosEstoSeguro != null)
                 {
                     <button type="button" class="btn btn-primary d-md-inline-block form-inline mr-0 mr-md-2 ml-3" data-toggle="modal" data-target="#addEstoSeguro"><div class="fas fa-fw fa-lock"></div></button>
                 }
@@ -57,6 +63,16 @@
                             string n = @item + "_Add";
                             n = n.Replace(" ", "");
                             <input type="text" class="form-control col-md-2 mr-md-3 ml-3" placeholder="@item" id="@n" />
+                        }
+                    }
+
+                    @if (ViewBag.AtributosAddSel != null)
+                    {
+                        foreach (var item in @ViewBag.AtributosAddSel)
+                        {
+                            string n = @item + "_Add";
+                            n = n.Replace(" ", "");
+                            <select class="form-control col-md-2 mr-md-3 ml-3" id="@n"><option value=0>@n.Replace("Sel","").Replace("_Add","")</option></select>
                         }
                     }
                 </div>
@@ -86,6 +102,15 @@
                             string n = @item + "_Edit";
                             n = n.Replace(" ", "");
                             <input type="text" class="form-control col-md-2 mr-md-3 ml-3" placeholder="@item" id="@n" />
+                        }
+                    }
+                    @if (ViewBag.AtributosEditableSel != null)
+                    {
+                        foreach (var item in @ViewBag.AtributosEditableSel)
+                        {
+                            string n = @item + "_Edit";
+                            n = n.Replace(" ", "");
+                            <select class="form-control col-md-2 mr-md-3 ml-3" id="@n"><option value=0>@n.Replace("Sel", "").Replace("_Edit", "")</option></select>
                         }
                     }
                 </div>
