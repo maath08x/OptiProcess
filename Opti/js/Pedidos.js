@@ -6,6 +6,24 @@ var xhttpPessoas = new XMLHttpRequest();
 xhttpPessoas.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         glb_Pessoas = JSON.parse(xhttpPessoas.response);
+
+        // Preenche combobox
+        var selPessoaSearch = document.getElementById("SelPessoaID_Search");
+        for (var i = 0; i < glb_Pessoas.length; i++) {
+            selPessoaSearch.innerHTML += "<option value=" + glb_Pessoas[i]["pessoaID"] + ">" + glb_Pessoas[i]["nome"] + "</option>";
+        }
+
+        // Preenche combobox
+        var selPessoaAdd = document.getElementById("PessoaID_Add");
+        for (var i = 0; i < glb_Pessoas.length; i++) {
+            selPessoaAdd.innerHTML += "<option value=" + glb_Pessoas[i]["pessoaID"] + ">" + glb_Pessoas[i]["nome"] + "</option>";
+        }
+
+        // Preenche combobox
+        var selPessoaEdit = document.getElementById("PessoaID_Edit");
+        for (var i = 0; i < glb_Pessoas.length; i++) {
+            selPessoaEdit.innerHTML += "<option value=" + glb_Pessoas[i]["pessoaID"] + ">" + glb_Pessoas[i]["nome"] + "</option>";
+        }
     }
 };
 var sURL = "http://" + location.host + "/Pessoas/Pesquisar?";
@@ -17,6 +35,12 @@ var xhttpTipos = new XMLHttpRequest();
 xhttpTipos.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         glb_Tipos = JSON.parse(xhttpTipos.response);
+
+        // Preenche combobox
+        var selTipos = document.getElementById("Tipo_Add");
+        for (var i = 0; i < glb_Tipos.length; i++) {
+            selTipos.innerHTML += "<option value=" + glb_Tipos[i]["tipoID"] + ">" + glb_Tipos[i]["nome"] + "</option>";
+        }
     }
 };
 var sURL = "http://" + location.host + "/TiposGerais/Pesquisar?TelaID=2";
@@ -28,6 +52,12 @@ var xhttpProdutos = new XMLHttpRequest();
 xhttpProdutos.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         glb_Produtos = JSON.parse(xhttpProdutos.response);
+
+        // Preenche combobox
+        var selProdutos = document.getElementById("Add_ProdutoID");
+        for (var i = 0; i < glb_Produtos.length; i++) {
+            selProdutos.innerHTML += "<option value=" + glb_Produtos[i]["produtoID"] + ">" + glb_Produtos[i]["nome"] + "</option>";
+        }
     }
 };
 var sURL = "http://" + location.host + "/Produtos/Pesquisar?";
@@ -36,10 +66,9 @@ xhttpProdutos.send();
 
 function Pesquisar() {
     var nID = document.getElementById("ID_Search");
-    var nPessoaID = document.getElementById("PessoaID_Search");
-    var nTipo = document.getElementById("Tipo_Search");
+    var nPessoaID = document.getElementById("SelPessoaID_Search");
 
-    var sRequest = "ID=" + escape(nID.value) + "&PedidoID=" + escape(nPessoaID.value) + "&Tipo=" + escape(nTipo.value);
+    var sRequest = "ID=" + escape(nID.value) + "&PessoaID=" + escape(nPessoaID.value);
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -165,7 +194,7 @@ function idAtualDetail(nPedidoID) {
                 for (var i = 0; i < response.length; i++) {
                     sInner += "<tr>";
 
-                    for (var x = 0; x < glb_Tipos.length; x++) {
+                    for (var x = 0; x < glb_Produtos.length; x++) {
                         if (glb_Produtos[x]["produtoID"] == response[i]["produtoID"]) {
                             sInner += "<td id=\"produtoID" + i + "\">" + glb_Produtos[x]["nome"] + "</td>";
                         }

@@ -74,7 +74,7 @@
                     </button>
                 </div>
                 <div class="modal-body form-row">
-                    <input type="text" class="form-control col-md-2 mr-md-3 ml-3" placeholder="Produto ID" id="Add_ProdutoID" />
+                    <select class="form-control col-md-2 mr-md-3 ml-3" id="Add_ProdutoID"><option value=0>Produto</option></select>
                     <input type="number" class="form-control col-md-2 mr-md-3 ml-3" placeholder="Quantidade" id="Add_Quantidade" />
                 </div>
                 <div class="modal-footer">
@@ -102,7 +102,7 @@
                         {
                             string n = @item + "_Add";
                             n = n.Replace(" ", "");
-                            <input type="text" class="form-control col-md-2 mr-md-3 ml-3" placeholder="@item" id="@n" />
+                            <select class="form-control col-md-2 mr-md-3 ml-3" id="@n"><option value=0>@n.Replace("Sel", "").Replace("_Add", "")</option></select>
                         }
                     }
                 </div>

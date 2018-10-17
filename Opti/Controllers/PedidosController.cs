@@ -21,14 +21,14 @@ namespace Opti.Controllers
         {
             ViewBag.Title = "Pedidos";
             ViewBag.AtributosSearch = new List<string>();
+            ViewBag.AtributosSearchSel = new List<string>();
             ViewBag.AtributosGrid = new List<string>();
-            ViewBag.AtributosEditable = new List<string>();
+            ViewBag.AtributosEditableSel = new List<string>();
             ViewBag.AtributosAddDiff = new List<string>();
             ViewBag.AtributosEstoSeguro = new List<string>();
 
             ViewBag.AtributosSearch.Add("ID");
-            ViewBag.AtributosSearch.Add("Pessoa ID");
-            ViewBag.AtributosSearch.Add("Tipo");
+            ViewBag.AtributosSearchSel.Add("SelPessoa ID");
 
             ViewBag.AtributosGrid.Add("ID");
             ViewBag.AtributosGrid.Add("Pessoa ID");
@@ -37,7 +37,7 @@ namespace Opti.Controllers
             ViewBag.AtributosGrid.Add("Previsão de Conclusão");
             ViewBag.AtributosGrid.Add("Finalizado");
 
-            ViewBag.AtributosEditable.Add("Pessoa ID");
+            ViewBag.AtributosEditableSel.Add("Pessoa ID");
 
             ViewBag.AtributosAddDiff.Add("Pessoa ID");
             ViewBag.AtributosAddDiff.Add("Tipo");
@@ -50,7 +50,6 @@ namespace Opti.Controllers
         {
             pedidos.pedidoID = Convert.ToInt32((Request.Params["ID"] == "" ? "0" : Request.Params["ID"]));
             pedidos.pessoaID = Convert.ToInt32((Request.Params["PessoaID"] == "" ? "0" : Request.Params["PessoaID"]));
-            pedidos.tipoPedido = Convert.ToInt32((Request.Params["Tipo"] == "" ? "0" : Request.Params["Tipo"]));
             List<Pedidos> lp = pedidos.Pesquisar(pedidos.pedidoID, pedidos.pessoaID);
 
             string txt = JsonConvert.SerializeObject(lp);

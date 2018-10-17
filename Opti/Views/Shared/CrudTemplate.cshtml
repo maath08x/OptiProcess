@@ -15,6 +15,10 @@
                     n = n.Replace(" ", "");
                     <input type="text" class="form-control col-md-2 mr-md-3 ml-3" placeholder="@item" id="@n" />
                 }
+
+            }
+            @if (ViewBag.AtributosSearchSel != null)
+            {
                 foreach (var item in @ViewBag.AtributosSearchSel)
                 {
                     string n = (@item + "_Search");
