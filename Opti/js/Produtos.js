@@ -6,11 +6,40 @@ var xhttpTipos = new XMLHttpRequest();
 xhttpTipos.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         glb_Tipos = JSON.parse(xhttpTipos.response);
+
+        // Preenche combobox
+        var selTipos = document.getElementById("Add_MaqProdutoID");
+        for (var i = 0; i < glb_Tipos.length; i++) {
+            selTipos.innerHTML += "<option value=" + glb_Tipos[i]["tipoID"] + ">" + glb_Tipos[i]["nome"] + "</option>";
+        }
     }
 };
 var sURL = "http://" + location.host + "/TiposGerais/Pesquisar?TelaID=1";
 xhttpTipos.open("GET", sURL, true);
 xhttpTipos.send();
+
+var glb_Produtos;
+var xhttpProdutos = new XMLHttpRequest();
+xhttpProdutos.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        glb_Produtos = JSON.parse(xhttpProdutos.response);
+
+        // Preenche combobox
+        var selProdutosAdd = document.getElementById("Add_ProdutoID");
+        for (var i = 0; i < glb_Produtos.length; i++) {
+            selProdutosAdd.innerHTML += "<option value=" + glb_Produtos[i]["produtoID"] + ">" + glb_Produtos[i]["nome"] + "</option>";
+        }
+
+        // Preenche combobox
+        var selProdutosEdit = document.getElementById("Edit_SubProdutoID");
+        for (var i = 0; i < glb_Produtos.length; i++) {
+            selProdutosEdit.innerHTML += "<option value=" + glb_Produtos[i]["produtoID"] + ">" + glb_Produtos[i]["nome"] + "</option>";
+        }
+    }
+};
+var sURL = "http://" + location.host + "/Produtos/Pesquisar?";
+xhttpProdutos.open("GET", sURL, true);
+xhttpProdutos.send();
 
 function Adicionar() {
     var sDescricao = document.getElementById("Descrição_Add");

@@ -189,6 +189,7 @@ namespace Opti.Models
                 ProdutosFilhos produtosFilhos = pm.ProdutosFilhos.Single(c => c.produtosFilhosID.Equals(pf.produtosFilhosID));
 
                 produtosFilhos.quantidade = pf.quantidade;
+                produtosFilhos.filhoID = pf.filhoID;
 
                 pm.SaveChanges();
 
